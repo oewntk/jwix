@@ -357,7 +357,7 @@ public class Synset implements ISynset
 		StringBuilder sb = new StringBuilder();
 		sb.append("SYNSET{");
 		assert id != null;
-		sb.append(id.toString());
+		sb.append(id);
 		sb.append(" : Words[");
 		for (IWord word : words)
 		{
@@ -434,7 +434,7 @@ public class Synset implements ISynset
 	}
 
 	/**
-	 * A word builder used to construct word objects inside of the synset object
+	 * A word builder used to construct word objects inside the synset object
 	 * constructor.
 	 *
 	 * @author Mark A. Finlayson

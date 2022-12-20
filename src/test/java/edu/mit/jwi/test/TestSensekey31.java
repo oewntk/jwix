@@ -1,44 +1,42 @@
 package edu.mit.jwi.test;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 
-public class Test_sensekey_XX
+public class TestSensekey31
 {
 	private static JWI jwi;
 
 	@BeforeAll
 	public static void init() throws IOException
 	{
-		String wnHome = System.getenv("WNHOMEXX" /* + File.separator + "dict" */);
+		String wnHome = System.getenv("WNHOME31" /* + File.separator + "dict" */);
 		jwi = new JWI(wnHome);
 	}
 
-	@Test
-	public void sensekeysLive()
+	@Test public void sensekeysLive()
 	{
 		try
 		{
 			TestLib.allSensekeysAreLive(jwi);
 		}
-		catch (AssertionError ae)
+		catch(AssertionError ae)
 		{
 			TestLib.listDeadSensekeys(jwi);
 			throw ae;
 		}
 	}
 
-	@Test
-	public void senseEntriesLive()
+	@Test public void senseEntriesLive()
 	{
 		TestLib.allSenseEntriesAreLive(jwi);
 	}
 
-	@Test
-	public void sensekey()
+	@Test public void sensekey()
 	{
 		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:00:abundant:00"));
 		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:00:many:00"));

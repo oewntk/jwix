@@ -534,7 +534,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 			}
 
 			// determine if it's already unmodifiable, wrap if not
-			Map<?, ?> map = Collections.unmodifiableMap(Collections.emptyMap());
+			Map<?, ?> map = Collections.emptyMap();
 			if (hiddenMap.getClass() != map.getClass())
 			{
 				hiddenMap = Collections.unmodifiableMap(hiddenMap);
@@ -753,7 +753,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 			}
 
 			// check to see if direct access works with the file
-			// often people will extract the files incorrectly on windows machines
+			// often people will extract the files incorrectly on Windows machines
 			// and the binary files will be corrupted with extra CRs
 
 			// get first line
@@ -780,7 +780,7 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 
 			POS pos = contentType.getPOS();
 			assert pos != null;
-			System.err.println(System.currentTimeMillis() + " - Error on direct access in " + pos.toString() + " data file: check CR/LF endings");
+			System.err.println(System.currentTimeMillis() + " - Error on direct access in " + pos + " data file: check CR/LF endings");
 		}
 
 		src = createBinarySearch(file, contentType);

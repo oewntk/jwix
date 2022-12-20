@@ -62,7 +62,7 @@ public class DataType<T> implements IDataType<T>
 	private final ILineParser<T> parser;
 
 	/**
-	 * Constructs a new data type. This constructor takes the hints as an
+	 * Constructs a new data type. This constructor takes the hints as a
 	 * varargs array.
 	 *
 	 * @param userFriendlyName a user-friendly name, for easy identification of this data
@@ -83,7 +83,7 @@ public class DataType<T> implements IDataType<T>
 	}
 
 	/**
-	 * Constructs a new data type. This constructor takes the hints as an
+	 * Constructs a new data type. This constructor takes the hints as a
 	 * collection.
 	 *
 	 * @param userFriendlyName a user-friendly name, for easy identification of this data

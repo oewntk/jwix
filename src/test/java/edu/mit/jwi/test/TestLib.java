@@ -40,7 +40,7 @@ public class TestLib
 			boolean isLive = sensekeyIsLive(jwi, sk);
 			if (!isLive)
 			{
-				System.err.println("☈ sense = " + sense.toString() + " generated sensekey=" + sk + " not found");
+				System.err.println("☈ sense = " + sense + " generated sensekey=" + sk + " not found");
 				//throw new IllegalArgumentException(sk.toString());
 				errorCount.getAndIncrement();
 			}
@@ -65,37 +65,6 @@ public class TestLib
 	public static void allSenseEntriesAreLive(@NonNull JWI jwi)
 	{
 		jwi.forAllSenseEntries((se) -> {
-			assertNotNull(se);
-			int offset = se.getOffset();
-			POS pos = se.getPOS();
-			ISynsetID sid = new SynsetID(offset, pos);
-			assertNotNull(sid);
-			ISynset synset = jwi.getDict().getSynset(sid);
-			assertNotNull(synset);
-		});
-	}
-
-	public static void allSenseEntryPoolsAreLive(@NonNull JWI jwi)
-	{
-		jwi.forAllSenseEntryPools((ses) -> {
-			assertNotNull(ses);
-			assertTrue(ses.length >= 1);
-			//if(ses.length > 1)
-			for (ISenseEntry se : ses)
-			{
-				int offset = se.getOffset();
-				POS pos = se.getPOS();
-				ISynsetID sid = new SynsetID(offset, pos);
-				assertNotNull(sid);
-				ISynset synset = jwi.getDict().getSynset(sid);
-				assertNotNull(synset);
-			}
-		});
-	}
-
-	public static void allSenseEntriesFromPoolsAreLive(@NonNull JWI jwi)
-	{
-		jwi.forAllSenseEntriesFromPools((se) -> {
 			assertNotNull(se);
 			int offset = se.getOffset();
 			POS pos = se.getPOS();

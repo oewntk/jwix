@@ -216,13 +216,13 @@ public class WordID implements IWordID
 	{
 		assert id != null;
 		return 31 * id.hashCode();
-		//        final int PRIME = 31;
-		//        int result = 1;
-		//        result = PRIME * result + ((id == null) ? 0 : id.hashCode());
-		//        result = PRIME * result + num;
-		//        if (lemma != null)
-		//        	result = PRIME * result + lemma.hashCode();
-		//        return result;
+		// final int PRIME = 31;
+		// int result = 1;
+		// result = PRIME * result + ((id == null) ? 0 : id.hashCode());
+		// result = PRIME * result + num;
+		// if (lemma != null)
+		// 	result = PRIME * result + lemma.hashCode();
+		// return result;
 	}
 
 	/*
@@ -286,7 +286,7 @@ public class WordID implements IWordID
 
 	/**
 	 * Parses the result of the {@link #toString()} method back into an
-	 * {@code WordID}. Word id's are always of the following format:
+	 * {@code WordID}. Word ids are always of the following format:
 	 * WID-########-P-##-lemma where ######## is the eight decimal digit
 	 * zero-filled offset of the associated synset, P is the upper case
 	 * character representing the part of speech, ## is the two hexadecimal

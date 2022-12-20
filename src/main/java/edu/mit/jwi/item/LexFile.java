@@ -294,12 +294,12 @@ public class LexFile implements ILexFile
 
 	/**
 	 * Returns <code>true</code> if the number represents a valid lexical file
-	 * number, namely, a number in in the closed range [0, 99]; returns
+	 * number, namely, a number in the closed range [0, 99]; returns
 	 * <code>false</code> otherwise.
 	 *
 	 * @param num the number to be checked
 	 * @return <code>true</code> if the number represents a valid lexical file
-	 * number, namely, a number in in the closed range [0, 99]; returns
+	 * number, namely, a number in the closed range [0, 99]; returns
 	 * <code>false</code> otherwise.
 	 * @since JWI 2.1.0
 	 */

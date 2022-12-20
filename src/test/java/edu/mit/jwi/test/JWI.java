@@ -1,21 +1,17 @@
 package edu.mit.jwi.test;
 
-import edu.mit.jwi.NonNull;
-import edu.mit.jwi.Nullable;
-import edu.mit.jwi.*;
-import edu.mit.jwi.data.FileProvider;
-import edu.mit.jwi.data.compare.Comparators;
-import edu.mit.jwi.item.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import edu.mit.jwi.*;
+import edu.mit.jwi.data.FileProvider;
+import edu.mit.jwi.item.*;
 
 /**
  * JWI
@@ -42,51 +38,34 @@ public class JWI
 
 	public JWI(@NonNull final String wnHome) throws IOException
 	{
-		this(wnHome, Mode.STANDARD);
+		this(wnHome, null);
 	}
 
-	public enum Mode
-	{STANDARD, XX, XX_POOLS, XX_LEGACY}
-
-	public JWI(@NonNull final String wnHome, @NonNull Mode mode) throws IOException
+	/**
+	 * Constructor
+	 *
+	 * @param wnHome wordnet home
+	 * @param config config
+	 *               final Config config = new Config();
+	 *               config.checkLexicalId = false;
+	 *               config.charSet = StandardCharsets.UTF_8;
+	 *               config.indexSenseKeyComparator = Comparators.CaseSensitiveSenseKeyLineComparator.getInstance();
+	 * @throws IOException io exception
+	 */
+	public JWI(@NonNull final String wnHome, @Nullable final Config config) throws IOException
 	{
 		FileProvider.verbose = true;
 		System.out.printf("FROM %s%n", wnHome);
-		System.out.printf("MODE %s%n", mode);
+		System.out.printf("CONFIG %s%n", config);
 
 		// construct the URL to the WordNet dictionary directory
 		URL url = new File(wnHome).toURI().toURL();
 
-		Config config = null;
-		switch (mode)
-		{
-			case XX:
-			{
-				config = new Config();
-				config.checkLexicalId = false;
-				config.charSet = StandardCharsets.UTF_8;
-				config.indexSenseKeyComparator = Comparators.CaseSensitiveSenseKeyLineComparator.getInstance();
+		/*
 				break;
 			}
-			case XX_POOLS:
-			{
-				config = new Config();
-				config.checkLexicalId = false;
-				config.charSet = StandardCharsets.UTF_8;
-				config.indexSensePattern = "index\\.sense\\.pools";
-				break;
 			}
-			case XX_LEGACY:
-			{
-				// construct the config
-				config = new Config();
-				config.checkLexicalId = false;
-				config.charSet = StandardCharsets.UTF_8;
-				config.indexSensePattern = "index\\.sense\\..legacy";
-				break;
-			}
-			default:
-		}
+		*/
 
 		// construct the dictionary object and open it
 		this.dict = new Dictionary(url, config);
@@ -95,7 +74,8 @@ public class JWI
 		this.dict.open();
 	}
 
-	@NonNull public IDictionary getDict()
+	@NonNull
+	public IDictionary getDict()
 	{
 		return dict;
 	}
@@ -226,74 +206,6 @@ public class JWI
 				if (f != null)
 				{
 					f.accept(entry);
-				}
-			}
-			catch (Exception e)
-			{
-				System.err.println(e.getMessage());
-			}
-		}
-	}
-
-	public void forAllSenseEntryPools(@Nullable final Consumer<ISenseEntry[]> f)
-	{
-		Iterator<ISenseEntry[]> it = this.dict.getSenseEntriesIterator();
-		while (it.hasNext())
-		{
-			ISenseEntry[] pool = it.next();
-			if (f != null)
-			{
-				f.accept(pool);
-			}
-		}
-	}
-
-	public void tryForAllSenseEntryPools(@Nullable final Consumer<ISenseEntry[]> f)
-	{
-		Iterator<ISenseEntry[]> it = this.dict.getSenseEntriesIterator();
-		while (it.hasNext())
-		{
-			try
-			{
-				ISenseEntry[] pool = it.next();
-				if (f != null)
-				{
-					f.accept(pool);
-				}
-			}
-			catch (Exception e)
-			{
-				System.err.println(e.getMessage());
-			}
-		}
-	}
-
-	public void forAllSenseEntriesFromPools(@Nullable final Consumer<ISenseEntry> f)
-	{
-		Iterator<ISenseEntry[]> it = this.dict.getSenseEntriesIterator();
-		while (it.hasNext())
-		{
-			ISenseEntry[] pool = it.next();
-			if (f != null)
-			{
-				for (ISenseEntry entry : pool)
-					f.accept(entry);
-			}
-		}
-	}
-
-	public void tryForAllSenseEntriesFromPools(@Nullable final Consumer<ISenseEntry> f)
-	{
-		Iterator<ISenseEntry[]> it = this.dict.getSenseEntriesIterator();
-		while (it.hasNext())
-		{
-			try
-			{
-				ISenseEntry[] pool = it.next();
-				if (f != null)
-				{
-					for (ISenseEntry entry : pool)
-						f.accept(entry);
 				}
 			}
 			catch (Exception e)
@@ -481,7 +393,9 @@ public class JWI
 		// adj marker
 		AdjMarker marker = sense.getAdjectiveMarker();
 		if (marker != null)
+		{
 			System.out.println("  marker = " + marker);
+		}
 
 		// sensekey
 		ISenseKey senseKey = sense.getSenseKey();
@@ -492,7 +406,7 @@ public class JWI
 			assert synset != null;
 			POS pos = sense.getPOS();
 			assert pos != null;
-			System.err.printf("⚠ Missing sensekey %s for sense at offset %d with pos %s%n", senseKey.toString(), synset.getOffset(), pos.toString());
+			System.err.printf("⚠ Missing sensekey %s for sense at offset %d with pos %s%n", senseKey.toString(), synset.getOffset(), pos);
 			// throw new IllegalArgumentException(String.format("%s at offset %d with pos %s%n", senseKey.toString(), sense.getSynset().getOffset(),sense.getPOS().toString()));
 		}
 
@@ -504,8 +418,7 @@ public class JWI
 		List<IVerbFrame> verbFrames = sense.getVerbFrames();
 		walk(verbFrames, sense.getLemma());
 
-		System.out.printf("  sensenum: %s tag cnt:%s%n", senseEntry == null ? "<missing>" : senseEntry.getSenseNumber(),
-				senseEntry == null ? "<missing>" : senseEntry.getTagCount());
+		System.out.printf("  sensenum: %s tag cnt:%s%n", senseEntry == null ? "<missing>" : senseEntry.getSenseNumber(), senseEntry == null ? "<missing>" : senseEntry.getTagCount());
 	}
 
 	public void walk(@Nullable final Map<IPointer, List<IWordID>> relatedMap)
@@ -521,7 +434,7 @@ public class JWI
 					assert related != null;
 					ISynset relatedSynset = related.getSynset();
 					assert relatedSynset != null;
-					System.out.printf("  related %s lemma:%s synset:%s%n", pointer, related.getLemma(), relatedSynset.toString());
+					System.out.printf("  related %s lemma:%s synset:%s%n", pointer, related.getLemma(), relatedSynset);
 				}
 			}
 		}
@@ -532,7 +445,9 @@ public class JWI
 		if (verbFrames != null)
 		{
 			for (IVerbFrame verbFrame : verbFrames)
+			{
 				System.out.printf("  verb frame: %s : %s%n", verbFrame.getTemplate(), verbFrame.instantiateTemplate(lemma));
+			}
 		}
 	}
 
@@ -572,18 +487,22 @@ public class JWI
 			assert synset2 != null;
 			System.out.printf("%s%s%n", indentSpace, toString(synset2));
 			if (canRecurse(p))
+			{
 				walk(synset2, p, level + 1);
+			}
 		}
 	}
 
 	// H E L P E R S
 
-	@NonNull public static String toString(@NonNull final ISynset synset)
+	@NonNull
+	public static String toString(@NonNull final ISynset synset)
 	{
 		return getMembers(synset) + synset.getGloss();
 	}
 
-	@NonNull public static String getMembers(@NonNull final ISynset synset)
+	@NonNull
+	public static String getMembers(@NonNull final ISynset synset)
 	{
 		final StringBuilder sb = new StringBuilder();
 		sb.append('{');

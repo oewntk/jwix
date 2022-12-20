@@ -121,7 +121,7 @@ public class DataLineParser implements ILineParser<ISynset>
 			boolean isAdjSat = (synset_tag == 's');
 
 			// A synset is an adjective head if it is the 00 lexical file, is
-			// not a adjective satellite, and it has an antonym. The Wordnet
+			// not an adjective satellite, and it has an antonym. The Wordnet
 			// definition says head synsets have to have an antonym, but this is
 			// actually violated (perhaps mistakenly) in a small number of
 			// cases, e.g., in Wordnet 3.0:

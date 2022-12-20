@@ -102,7 +102,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public IVersion getVersion()
 	{
 		checkOpen();
-		assert provider != null;
 		return provider.getVersion();
 	}
 
@@ -113,7 +112,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public boolean open() throws IOException
 	{
-		assert provider != null;
 		return provider.open();
 	}
 
@@ -124,7 +122,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public void close()
 	{
-		assert provider != null;
 		provider.close();
 	}
 
@@ -135,7 +132,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public boolean isOpen()
 	{
-		assert provider != null;
 		return provider.isOpen();
 	}
 
@@ -162,7 +158,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	@Nullable
 	public Charset getCharset()
 	{
-		assert provider != null;
 		return provider.getCharset();
 	}
 
@@ -173,7 +168,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public void setCharset(Charset charset)
 	{
-		assert provider != null;
 		provider.setCharset(charset);
 	}
 
@@ -184,7 +178,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public void setComparator(@NonNull ContentTypeKey contentTypeKey, ILineComparator comparator)
 	{
-		assert provider != null;
 		provider.setComparator(contentTypeKey, comparator);
 	}
 
@@ -195,7 +188,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	 */
 	public void setSourceMatcher(@NonNull ContentTypeKey contentTypeKey, String pattern)
 	{
-		assert provider != null;
 		provider.setSourceMatcher(contentTypeKey, pattern);
 	}
 
@@ -221,7 +213,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public IIndexWord getIndexWord(@NonNull IIndexWordID id)
 	{
 		checkOpen();
-		assert provider != null;
 		IContentType<IIndexWord> content = provider.resolveContentType(DataType.INDEX, id.getPOS());
 		IDataSource<?> file = provider.getSource(content);
 		assert file != null;
@@ -356,7 +347,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public ISenseEntry getSenseEntry(@NonNull ISenseKey key)
 	{
 		checkOpen();
-		assert provider != null;
 		IContentType<ISenseEntry> content = provider.resolveContentType(DataType.SENSE, null);
 		IDataSource<ISenseEntry> file = provider.getSource(content);
 		assert file != null;
@@ -381,7 +371,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public ISenseEntry[] getSenseEntries(@NonNull ISenseKey key)
 	{
 		checkOpen();
-		assert provider != null;
 		IContentType<ISenseEntry[]> content = provider.resolveContentType(DataType.SENSES, null);
 		IDataSource<ISenseEntry[]> file = provider.getSource(content);
 		assert file != null;
@@ -406,7 +395,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public ISynset getSynset(@NonNull ISynsetID id)
 	{
 		checkOpen();
-		assert provider != null;
 		IContentType<ISynset> content = provider.resolveContentType(DataType.DATA, id.getPOS());
 		IDataSource<ISynset> file = provider.getSource(content);
 		String zeroFilledOffset = Synset.zeroFillOffset(id.getOffset());
@@ -508,7 +496,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	public IExceptionEntry getExceptionEntry(@NonNull IExceptionEntryID id)
 	{
 		checkOpen();
-		assert provider != null;
 		IContentType<IExceptionEntryProxy> content = provider.resolveContentType(DataType.EXCEPTION, id.getPOS());
 		IDataSource<IExceptionEntryProxy> file = provider.getSource(content);
 		// fix for bug 010

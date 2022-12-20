@@ -1,25 +1,20 @@
 package edu.mit.jwi.test;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 
-import edu.mit.jwi.item.POS;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
-public class Tests_2020
+public class TestsWn30
 {
 	private static JWI jwi;
 
 	@BeforeAll
 	public static void init() throws IOException
 	{
-		String wnHome = System.getenv("WNHOME2020" /* + File.separator + "dict" */);
+		String wnHome = System.getenv("WNHOME30" /* + File.separator + "dict" */);
 		jwi = new JWI(wnHome);
 	}
 
@@ -44,40 +39,40 @@ public class Tests_2020
 
 	@Test public void allSensesAreNonNull()
 	{
-		jwi.forAllSenses(Assert::assertNotNull);
+		jwi.forAllSenses(Assertions::assertNotNull);
 	}
 
 	@Test public void allSynsetsAreNonNull()
 	{
-		jwi.forAllSynsets(Assert::assertNotNull);
+		jwi.forAllSynsets(Assertions::assertNotNull);
 	}
 
 	@Test public void allSenseEntriesAreNonNull()
 	{
-		jwi.forAllSenseEntries(Assert::assertNotNull);
+		jwi.forAllSenseEntries(Assertions::assertNotNull);
 	}
 
 	@Test public void allLemmasAreNonNull()
 	{
 		jwi.forAllLemmas((l) -> {
-			assertNotNull(l);
-			assertFalse(l.isEmpty());
+			Assertions.assertNotNull(l);
+			Assertions.assertFalse(l.isEmpty());
 		});
 	}
 
 	@Test public void allSensekeysAreNonNull()
 	{
-		jwi.forAllSensekeys(Assert::assertNotNull);
+		jwi.forAllSensekeys(Assertions::assertNotNull);
 	}
 
 	@Test public void allSynsetRelationsAreNonNull()
 	{
-		jwi.forAllSynsetRelations(Assert::assertNotNull);
+		jwi.forAllSynsetRelations(Assertions::assertNotNull);
 	}
 
 	@Test public void allSenseRelationsAreNonNull()
 	{
-		jwi.forAllSenseRelations(Assert::assertNotNull);
+		jwi.forAllSenseRelations(Assertions::assertNotNull);
 	}
 
 	// enum live
@@ -122,12 +117,5 @@ public class Tests_2020
 	@Test public void adjMarker()
 	{
 		jwi.walk("galore");
-	}
-
-	// the test involves a frameless entry
-	@Test public void frameless()
-	{
-		jwi.getDict().getIndexWord("fangirl", POS.VERB);
-		jwi.walk("fangirl", POS.VERB);
 	}
 }

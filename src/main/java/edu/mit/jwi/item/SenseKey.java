@@ -452,7 +452,7 @@ public class SenseKey implements ISenseKey
 	}
 
 	/**
-	 * Returns a a string representation of the specified sense key object.
+	 * Returns a string representation of the specified sense key object.
 	 *
 	 * @param key the sense key to be encoded as a string
 	 * @return the string representation of the sense key

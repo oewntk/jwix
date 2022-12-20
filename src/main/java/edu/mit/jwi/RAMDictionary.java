@@ -115,7 +115,7 @@ public class RAMDictionary implements IRAMDictionary
 	/**
 	 * Constructs a new wrapper RAM dictionary that will load the contents the
 	 * specified local Wordnet data, with the specified load policy. Note that
-	 * if the file points to a exported image of an in-memory dictionary, the
+	 * if the file points to an exported image of an in-memory dictionary, the
 	 * required load policy is to load immediately.
 	 *
 	 * @param file a file pointing to a local copy of wordnet; may not be
@@ -146,14 +146,14 @@ public class RAMDictionary implements IRAMDictionary
 
 	/**
 	 * Loads data from the specified File using the specified load policy. Note
-	 * that if the file points to to a resource that is the exported image of an
+	 * that if the file points to a resource that is the exported image of an
 	 * in-memory dictionary, the specified load policy is ignored: the
 	 * dictionary is loaded into memory immediately.
 	 *
 	 * @param file       a file pointing to a local copy of wordnet; may not be
 	 *                   <code>null</code>
 	 * @param loadPolicy the load policy of the dictionary; see constants in
-	 *                   {@link ILoadPolicy}. Note that if the file points to to a
+	 *                   {@link ILoadPolicy}. Note that if the file points to a
 	 *                   resource that is the exported image of an in-memory
 	 *                   dictionary, the specified load policy is ignored: the
 	 *                   dictionary is loaded into memory immediately.
@@ -175,7 +175,7 @@ public class RAMDictionary implements IRAMDictionary
 	 * @param url        a url pointing to a local copy of wordnet; may not be
 	 *                   <code>null</code>
 	 * @param loadPolicy the load policy of the dictionary; see constants in
-	 *                   {@link ILoadPolicy}. Note that if the url points to to a
+	 *                   {@link ILoadPolicy}. Note that if the url points to a
 	 *                   resource that is the exported image of an in-memory
 	 *                   dictionary, the specified load policy is ignored: the
 	 *                   dictionary is loaded into memory immediately.
@@ -217,7 +217,7 @@ public class RAMDictionary implements IRAMDictionary
 	}
 
 	/**
-	 * This is a internal constructor that unifies the constructor decision
+	 * This is an internal constructor that unifies the constructor decision
 	 * matrix. Exactly one of the backing dictionary or the input factory must
 	 * be non-<code>null</code>, otherwise an exception is thrown. If the
 	 * factory is non-<code>null</code>, the dictionary will ignore the
@@ -1317,7 +1317,6 @@ public class RAMDictionary implements IRAMDictionary
 		{
 			DictionaryData result = new DictionaryData();
 
-			assert source != null;
 			result.version = source.getVersion();
 
 			Map<IIndexWordID, IIndexWord> idxWords;
@@ -1416,7 +1415,7 @@ public class RAMDictionary implements IRAMDictionary
 
 		/**
 		 * Creates a new sense entry that replicates the specified sense entry.
-		 * The new sense entry replaces it's internal sense key with the
+		 * The new sense entry replaces its internal sense key with the
 		 * specified sense key thus removing a redundant object.
 		 *
 		 * @param key the sense key to be used
@@ -1479,7 +1478,7 @@ public class RAMDictionary implements IRAMDictionary
 
 		/**
 		 * This method is used when constructing the dictionary data object.
-		 * Constructs an map with an empty sub-map for every part of speech.
+		 * Constructs a map with an empty sub-map for every part of speech.
 		 * Subclasses may override to change map character
 		 *
 		 * @param <K> the type of the keys for the sub-maps
@@ -1665,7 +1664,7 @@ public class RAMDictionary implements IRAMDictionary
 		 * @since JWI 2.2.0
 		 */
 		@NonNull
-		protected IWord makeWord(ISynset newSynset, ISynset oldSynset, @NonNull IWord old)
+		protected IWord makeWord(ISynset newSynset, @SuppressWarnings("unused") ISynset oldSynset, @NonNull IWord old)
 		{
 			Map<IPointer, List<IWordID>> oldPtrs = old.getRelatedMap();
 			Map<IPointer, List<IWordID>> newPtrs = new HashMap<>(oldPtrs.size());
@@ -1697,7 +1696,7 @@ public class RAMDictionary implements IRAMDictionary
 
 		/**
 		 * Creates a new index word that replicates the specified index word.
-		 * The new index word replaces it's internal synset ids with synset ids
+		 * The new index word replaces its internal synset ids with synset ids
 		 * from the denoted synsets, thus removing redundant ids.
 		 *
 		 * @param old the index word to be replicated
@@ -1786,7 +1785,6 @@ public class RAMDictionary implements IRAMDictionary
 			@NonNull
 			public IWord toWord(ISynset synset)
 			{
-				assert oldWord != null;
 				return makeWord(synset, oldSynset, oldWord);
 			}
 
@@ -1882,7 +1880,7 @@ public class RAMDictionary implements IRAMDictionary
 
 	/**
 	 * This is a convenience method that transforms a Wordnet dictionary at the
-	 * specified file location into a in-memory image written to the specified
+	 * specified file location into an in-memory image written to the specified
 	 * output stream. The file may point to either a directory or in-memory
 	 * image.
 	 *
@@ -1903,7 +1901,7 @@ public class RAMDictionary implements IRAMDictionary
 
 	/**
 	 * This is a convenience method that transforms a Wordnet dictionary at the
-	 * specified url location into a in-memory image written to the specified
+	 * specified url location into an in-memory image written to the specified
 	 * output stream. The url may point to either a directory or in-memory
 	 * image.
 	 *
@@ -1924,7 +1922,7 @@ public class RAMDictionary implements IRAMDictionary
 
 	/**
 	 * This is a convenience method that transforms a Wordnet dictionary drawn
-	 * from the specified input stream factory into a in-memory image written to
+	 * from the specified input stream factory into an in-memory image written to
 	 * the specified output stream.
 	 *
 	 * @param in  the file from which the Wordnet data should be loaded; may not

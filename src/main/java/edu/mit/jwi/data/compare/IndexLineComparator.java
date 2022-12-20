@@ -82,7 +82,6 @@ public class IndexLineComparator implements ILineComparator
 	public int compare(@NonNull String s1, @NonNull String s2)
 	{
 		// check for comments
-		assert detector != null;
 		boolean c1 = detector.isCommentLine(s1), c2 = detector.isCommentLine(s2);
 
 		if (c1 & c2)

@@ -140,7 +140,7 @@ public interface ISynset extends IHasPOS, IItem<ISynsetID>
 	 * connected by pointers to this synset. Note that the related synsets
 	 * returned by this call are related by semantic pointers (as opposed to
 	 * lexical pointers, which are relationships between
-	 * {@link IWord} objects.
+	 * {@link IWord} objects.)
 	 *
 	 * @return a list of all synsets semantically related to the current synset
 	 * @since JWI 2.0.0

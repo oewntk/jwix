@@ -78,6 +78,7 @@ public interface IVersion extends Serializable
 		 *
 		 * @see edu.edu.mit.jwi.item.IVersion#getBugfixVersion()
 		 */
+		@Override
 		public int getBugfixVersion()
 		{
 			throw new UnsupportedOperationException();
@@ -88,6 +89,7 @@ public interface IVersion extends Serializable
 		 *
 		 * @see edu.edu.mit.jwi.item.IVersion#getMajorVersion()
 		 */
+		@Override
 		public int getMajorVersion()
 		{
 			throw new UnsupportedOperationException();
@@ -123,7 +125,7 @@ public interface IVersion extends Serializable
 		 */
 		@NonNull
 		@SuppressWarnings("SameReturnValue")
-		protected Object readResolve()
+		private Object readResolve()
 		{
 			return IVersion.NO_VERSION;
 		}

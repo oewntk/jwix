@@ -109,6 +109,6 @@ public class ExceptionEntry extends ExceptionEntryProxy implements IExceptionEnt
 	public String toString()
 	{
 		assert pos != null;
-		return super.toString() + "-" + pos.toString();
+		return super.toString() + "-" + pos;
 	}
 }

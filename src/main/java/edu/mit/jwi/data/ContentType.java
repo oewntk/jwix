@@ -111,7 +111,7 @@ public class ContentType<T> implements IContentType<T>
 
 		if (fKey.getPOS() != null)
 		{
-			fString = "[ContentType: " + fKey.getDataType().toString() + "/" + fKey.getPOS().toString() + "]";
+			fString = "[ContentType: " + fKey.getDataType().toString() + "/" + fKey.getPOS() + "]";
 		}
 		else
 		{

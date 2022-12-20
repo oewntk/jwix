@@ -83,7 +83,6 @@ public class WordnetStemmer extends SimpleStemmer
 		Set<String> result = new LinkedHashSet<>();
 
 		// first look for the word in the exception lists
-		assert dict != null;
 		IExceptionEntry excEntry = dict.getExceptionEntry(word, pos);
 		if (excEntry != null)
 		{

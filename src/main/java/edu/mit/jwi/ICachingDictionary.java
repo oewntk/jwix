@@ -90,7 +90,7 @@ public interface ICachingDictionary extends IDictionary
 		int size();
 
 		/**
-		 * Caches the specified item, if this cache is enabled. Otherwise does
+		 * Caches the specified item, if this cache is enabled. Otherwise, does
 		 * nothing.
 		 *
 		 * @param item the item to be cached; may not be <code>null</code>

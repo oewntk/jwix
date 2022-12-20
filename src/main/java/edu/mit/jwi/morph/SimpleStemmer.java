@@ -322,9 +322,9 @@ public class SimpleStemmer implements IStemmer
 		}
 		else
 		{
-			for (Object root : rootSet)
+			for (String root : rootSet)
 			{
-				poss.add(new StringBuffer((String) root));
+				poss.add(new StringBuffer(root));
 			}
 		}
 
@@ -451,7 +451,7 @@ public class SimpleStemmer implements IStemmer
 			{
 				continue;
 			}
-			for (Object partRoot : rootSets.get(i))
+			for (String partRoot : rootSets.get(i))
 			{
 				rootBuffer.replace(0, rootBuffer.length(), "");
 
@@ -459,7 +459,7 @@ public class SimpleStemmer implements IStemmer
 				{
 					if (j == i)
 					{
-						rootBuffer.append((String) partRoot);
+						rootBuffer.append(partRoot);
 					}
 					else
 					{

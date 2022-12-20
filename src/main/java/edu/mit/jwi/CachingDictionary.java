@@ -85,7 +85,7 @@ public class CachingDictionary implements ICachingDictionary
 
 	/**
 	 * This operation creates the cache that is used by the dictionary. It is
-	 * set inside it's own method for ease of subclassing. It is called only
+	 * set inside its own method for ease of subclassing. It is called only
 	 * when an instance of this class is created. It is marked protected for
 	 * ease of subclassing.
 	 *

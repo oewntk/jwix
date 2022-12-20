@@ -59,7 +59,7 @@ public interface IWord extends IHasPOS, IItem<IWordID>
 	ISenseKey getSenseKey();
 
 	/**
-	 * A integer in the closed range [0,15] that, when appended onto lemma,
+	 * An integer in the closed range [0,15] that, when appended onto lemma,
 	 * uniquely identifies a sense within a lexicographer file. Lexical id
 	 * numbers usually start with 0, and are incremented as additional senses of
 	 * the word are added to the same file, although there is no requirement
@@ -91,7 +91,7 @@ public interface IWord extends IHasPOS, IItem<IWordID>
 	 * specified pointer type. Note that this only returns words related by
 	 * lexical pointers (i.e., not semantic pointers). To retrieve items related
 	 * by semantic pointers, call {@link ISynset#getRelatedSynsets()}. If this
-	 * word has no targets for the for the specified pointer, this method
+	 * word has no targets for the specified pointer, this method
 	 * returns an empty list. This method never returns {@code null}.
 	 *
 	 * @param ptr the pointer for which related words are requested

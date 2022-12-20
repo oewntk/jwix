@@ -30,7 +30,7 @@ import edu.mit.jwi.data.ILoadable;
 public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
 {
 	/**
-	 * Exports the in-memory contents of the to the specified output stream.
+	 * Exports the in-memory contents of the data to the specified output stream.
 	 * This method flushes and closes the output stream when it is done writing
 	 * the data.
 	 *
@@ -48,7 +48,7 @@ public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
 	 * An input stream factory is used by certain constructors of the
 	 * {@link RAMDictionary} class to provide source data to load the dictionary
 	 * into memory from a stream. Using this interface allows the dictionary to
-	 * be closed and reopened again.  Therefore the expectation is that
+	 * be closed and reopened again.  Therefore, the expectation is that
 	 * the {@link #makeInputStream()} method may be called multiple times
 	 * without throwing an exception.
 	 *
@@ -107,7 +107,6 @@ public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
 		@NonNull
 		public InputStream makeInputStream() throws IOException
 		{
-			assert file != null;
 			return new FileInputStream(file);
 		}
 	}
@@ -150,7 +149,6 @@ public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
 		 */
 		public InputStream makeInputStream() throws IOException
 		{
-			assert url != null;
 			return url.openStream();
 		}
 	}

@@ -82,7 +82,6 @@ public class DataLineComparator implements ILineComparator
 	 */
 	public int compare(@NonNull String s1, @NonNull String s2)
 	{
-		assert detector != null;
 		boolean c1 = detector.isCommentLine(s1);
 		boolean c2 = detector.isCommentLine(s2);
 

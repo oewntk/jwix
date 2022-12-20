@@ -1,8 +1,8 @@
 <p align="center">
-<img width="256" height="256" src="images/oewntk.png">
+<img width="256" alt="oewntk" height="256" src="images/oewntk.png">
 </p>
 <p align="center">
-<img width="150" src="images/mavencentral.png">
+<img width="150" alt="mavencentral" src="images/mavencentral.png">
 </p>
 
 # JWI - Java WordNet Interface
@@ -17,9 +17,9 @@ Global LexID check can be disabled.
 
 Set global hints capability.
 
-Set dictionary resource matcher (eg can use one index amongst many).
+Set dictionary resource matcher (e.g. can use one index amongst many).
 
-Set dictionary comparator (eg use a different comparator for index file).
+Set dictionary comparator (e.g. use a different comparator for index file).
 
 Factored out IContentType key functionality into ContentType key enum.
 

@@ -3,7 +3,7 @@ package edu.mit.jwi.test;
 import org.junit.jupiter.api.Test;
 
 
-public class Test_lexid_XX
+public class TestLexid
 {
 	@Test public void parseCompatLexid()
 	{

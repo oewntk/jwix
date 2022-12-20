@@ -423,7 +423,7 @@ public class Word implements IWord
 	}
 
 	/**
-	 * Lexical id's are always an integer in the closed range [0,15]. In the
+	 * Lexical ids are always an integer in the closed range [0,15]. In the
 	 * wordnet data files, lexical ids are represented as a one digit
 	 * hexadecimal integer.
 	 *
