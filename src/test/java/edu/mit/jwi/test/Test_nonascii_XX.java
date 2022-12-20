@@ -1,22 +1,28 @@
 package edu.mit.jwi.test;
 
-import edu.mit.jwi.item.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
 import java.io.IOException;
 import java.util.List;
 
+import edu.mit.jwi.item.*;
+
 import static org.junit.Assert.assertTrue;
 
+@Deprecated
+@Disabled
 public class Test_nonascii_XX
 {
 	private static JWI jwi;
 
-	@BeforeClass public static void init() throws IOException
+	@BeforeAll
+	public static void init() throws IOException
 	{
 		String wnHome = System.getenv("WNHOMEXX_contrib" /* + File.separator + "dict" */);
-		jwi = new JWI(wnHome, JWI.Mode.XX);
+		jwi = new JWI(wnHome);
 	}
 
 	@Test public void nonascii()

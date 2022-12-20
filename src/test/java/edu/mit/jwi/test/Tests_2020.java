@@ -1,11 +1,13 @@
 package edu.mit.jwi.test;
 
-import edu.mit.jwi.item.POS;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
+
+import edu.mit.jwi.item.POS;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +16,8 @@ public class Tests_2020
 {
 	private static JWI jwi;
 
-	@BeforeClass public static void init() throws IOException
+	@BeforeAll
+	public static void init() throws IOException
 	{
 		String wnHome = System.getenv("WNHOME2020" /* + File.separator + "dict" */);
 		jwi = new JWI(wnHome);

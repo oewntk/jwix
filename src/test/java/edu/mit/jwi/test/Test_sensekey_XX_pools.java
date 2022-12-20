@@ -1,5 +1,10 @@
 package edu.mit.jwi.test;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.BeforeAll;
+
 import java.io.IOException;
 
 import edu.mit.jwi.data.parse.SenseKeyParser;
@@ -7,23 +12,20 @@ import edu.mit.jwi.data.parse.SenseLineParser;
 import edu.mit.jwi.data.parse.SensesLineParser;
 import edu.mit.jwi.item.ISenseEntry;
 import edu.mit.jwi.item.ISenseKey;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+@Deprecated
+@Disabled
 public class Test_sensekey_XX_pools
 {
 	private static JWI jwi;
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() throws IOException
 	{
 		String wnHome = System.getenv("WNHOMEXX" /* + File.separator + "dict" */);
-		jwi = new JWI(wnHome, JWI.Mode.XX_POOLS);
+		jwi = new JWI(wnHome, JWI.Mode.__XX_POOLS);
 	}
 
 	@Test

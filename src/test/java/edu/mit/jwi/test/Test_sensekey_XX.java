@@ -1,57 +1,72 @@
 package edu.mit.jwi.test;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class Test_sensekey_XX
 {
 	private static JWI jwi;
 
-	@BeforeClass public static void init() throws IOException
+	@BeforeAll
+	public static void init() throws IOException
 	{
 		String wnHome = System.getenv("WNHOMEXX" /* + File.separator + "dict" */);
-		jwi = new JWI(wnHome, JWI.Mode.XX);
+		jwi = new JWI(wnHome);
 	}
 
-	@Test public void sensekeysLive()
+	@Test
+	public void sensekeysLive()
 	{
 		try
 		{
 			TestLib.allSensekeysAreLive(jwi);
 		}
-		catch(AssertionError ae)
+		catch (AssertionError ae)
 		{
 			TestLib.listDeadSensekeys(jwi);
 			throw ae;
 		}
 	}
 
-	@Test public void senseEntriesLive()
+	@Test
+	public void senseEntriesLive()
 	{
 		TestLib.allSenseEntriesAreLive(jwi);
 	}
 
-	@Test public void sensekey()
+	@Test
+	public void sensekey()
 	{
-//		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:01:abundant:00"));
-//		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:02:many:00"));
-		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:01:many:00"));
-		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:02:abundant:00"));
-		assertFalse(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:00:many:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:00:abundant:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "galore%5:00:00:many:00"));
 
-		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "aborigine%1:18:00::"));
-		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "Aborigine%1:18:00::"));
-		assertFalse(TestLib.sensekeyFromStringIsLive(jwi, "aborigine%1:18:01::"));
-		assertFalse(TestLib.sensekeyFromStringIsLive(jwi, "Aborigine%1:18:01::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "aborigine%1:18:00::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "aborigine%1:18:01::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "Aborigine%1:18:00::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "Aborigine%1:18:01::"));
 
-//		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:19:warm:03"));
-//		assertFalse(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:02:warm:03"));
-		assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:02:warm:03"));
-		assertFalse(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:03:warm:03"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%3:00:01::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%3:00:02::"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:active:01"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:charged:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:eager:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:fast:01"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:fresh:01"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:good:01"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:illegal:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:lucky:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:near:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:new:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:popular:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:radioactive:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:sexy:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:skilled:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:tasty:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:unpleasant:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:violent:00"));
+		Assertions.assertTrue(TestLib.sensekeyFromStringIsLive(jwi, "hot%5:00:00:wanted:00"));
 	}
 }

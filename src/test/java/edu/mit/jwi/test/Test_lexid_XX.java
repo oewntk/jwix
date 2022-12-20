@@ -1,6 +1,7 @@
 package edu.mit.jwi.test;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 public class Test_lexid_XX
 {

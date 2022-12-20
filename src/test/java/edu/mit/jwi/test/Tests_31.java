@@ -1,8 +1,9 @@
 package edu.mit.jwi.test;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.IOException;
 
@@ -13,7 +14,8 @@ public class Tests_31
 {
 	private static JWI jwi;
 
-	@BeforeClass public static void init() throws IOException
+	@BeforeAll
+	public static void init() throws IOException
 	{
 		String wnHome = System.getenv("WNHOME31" /* + File.separator + "dict" */);
 		jwi = new JWI(wnHome);
