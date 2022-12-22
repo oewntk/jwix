@@ -1,20 +1,33 @@
 package edu.mit.jwi.test;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.BeforeAll;
-
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
-public class TestsWn30
+import edu.mit.jwi.item.POS;
+
+public class JWITests
 {
+	private static final boolean VERBOSE = !System.getProperties().containsKey("SILENT");
+
+	private static final PrintStream PS = VERBOSE ? System.out : new PrintStream(new OutputStream()
+	{
+		public void write(int b)
+		{
+			//DO NOTHING
+		}
+	});
+
 	private static JWI jwi;
 
 	@BeforeAll
 	public static void init() throws IOException
 	{
-		String wnHome = System.getenv("WNHOME30" /* + File.separator + "dict" */);
+		String wnHome = System.getProperty("SOURCE");
 		jwi = new JWI(wnHome);
 	}
 
@@ -92,30 +105,37 @@ public class TestsWn30
 	// the test involves new is_caused_by
 	@Test public void extraRelations()
 	{
-		jwi.walk("spread");
+		jwi.walk("spread", PS);
 	}
 
 	// the test involves Young (n) and adj
 	@Test public void cased()
 	{
-		jwi.walk("young");
+		jwi.walk("young", PS);
 	}
 
 	// the test involves new is_caused_by
 	@Test public void cased2()
 	{
-		jwi.walk("aborigine");
+		jwi.walk("aborigine", PS);
 	}
 
 	// the test involves adj
 	@Test public void adjSat()
 	{
-		jwi.walk("small");
+		jwi.walk("small", PS);
 	}
 
 	// the test involves galore (a)
 	@Test public void adjMarker()
 	{
-		jwi.walk("galore");
+		jwi.walk("galore", PS);
+	}
+
+	// the test involves a frameless entry
+	@Test public void frameless()
+	{
+		jwi.getDict().getIndexWord("fangirl", POS.VERB);
+		jwi.walk("fangirl", POS.VERB, PS);
 	}
 }

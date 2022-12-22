@@ -426,45 +426,12 @@ public class CachingDictionary implements ICachingDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntries(edu.edu.mit.jwi.item.ISenseKey)
-	 */
-	@Nullable
-	public ISenseEntry[] getSenseEntries(ISenseKey key)
-	{
-		checkOpen();
-		ISenseEntry[] entries = getCache().retrieveSenseEntries(key);
-		if (entries == null)
-		{
-			assert backing != null;
-			entries = backing.getSenseEntries(key);
-			if (entries != null)
-			{
-				getCache().cacheSenseEntries(entries);
-			}
-		}
-		return entries;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
 	 * @see edu.mit.jwi.IDictionary#getSenseEntryIterator()
 	 */
 	public Iterator<ISenseEntry> getSenseEntryIterator()
 	{
 		assert backing != null;
 		return backing.getSenseEntryIterator();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntriesIterator()
-	 */
-	public Iterator<ISenseEntry[]> getSenseEntriesIterator()
-	{
-		assert backing != null;
-		return backing.getSenseEntriesIterator();
 	}
 
 	/*

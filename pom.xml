@@ -7,7 +7,7 @@
 	<groupId>io.github.x-englishwordnet</groupId>
 	<artifactId>jwix</artifactId>
 	<packaging>jar</packaging>
-	<version>2.4.0.2</version>
+	<version>2.4.0.3</version>
 
 	<name>Java WordNet Extended Interface</name>
 	<description>Java library for interfacing with WordNet and English WordNet</description>
@@ -80,8 +80,23 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
 				<configuration>
-					<includes combine.children="append">
-					</includes>
+					<systemProperties combine.children="append">
+						<property>
+							<name>SOURCE</name>
+							<value>${project.basedir}/wndb</value>
+						</property>
+						<property>
+							<name>SOURCE2</name>
+							<value>${project.basedir}/wndb31</value>
+						</property>
+						<property>
+							<name>WORD</name>
+							<value>love</value>
+						</property>
+						<property>
+							<name>SILENT</name>
+						</property>
+					</systemProperties>
 				</configuration>
 			</plugin>
 
@@ -228,9 +243,6 @@
 			<id>ifXX</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>env.WNHOMEXX</name>
-				</property>
 			</activation>
 			<build>
 				<plugins>
@@ -239,14 +251,23 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>2.22.2</version>
 						<configuration>
+							<systemProperties>
+								<property>
+									<name>SOURCE</name>
+									<value>${project.basedir}/wndb</value>
+								</property>
+								<property>
+									<name>WORD</name>
+									<value>love</value>
+								</property>
+								<property>
+									<name>SILENT</name>
+								</property>
+							</systemProperties>
 							<includes>
-								<include>**/Tests_XX.java</include>
-								<include>**/Tests_XX_compat.java</include>
-								<include>**/Tests_XX_pools.java</include>
-								<include>**/Test_sensekey_XX.java</include>
-								<include>**/Test_sensekey_XX_pools.java</include>
-								<include>**/Test_lexid_XX.java</include>
-								<include>**/Test_nonascii_XX.java</include>
+								<include>**/JWITests.java</include>
+								<include>**/SensekeyTests.java</include>
+								<include>**/LexidTests.java</include>
 							</includes>
 						</configuration>
 					</plugin>
@@ -258,9 +279,6 @@
 			<id>if30</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>env.WNHOME30</name>
-				</property>
 			</activation>
 			<build>
 				<plugins>
@@ -269,8 +287,23 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>2.22.2</version>
 						<configuration>
+							<systemProperties>
+								<property>
+									<name>SOURCE</name>
+									<value>${project.basedir}/wndb30</value>
+								</property>
+								<property>
+									<name>WORD</name>
+									<value>love</value>
+								</property>
+								<property>
+									<name>SILENT</name>
+								</property>
+							</systemProperties>
 							<includes>
-								<include>**/Tests_30.java</include>
+								<include>**/JWITests.java</include>
+								<include>**/SensekeyTests.java</include>
+								<include>**/LexidTests.java</include>
 							</includes>
 						</configuration>
 					</plugin>
@@ -282,9 +315,6 @@
 			<id>if31</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>env.WNHOME31</name>
-				</property>
 			</activation>
 			<build>
 				<plugins>
@@ -293,9 +323,23 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>2.22.2</version>
 						<configuration>
+							<systemProperties>
+								<property>
+									<name>SOURCE</name>
+									<value>${project.basedir}/wndb31</value>
+								</property>
+								<property>
+									<name>WORD</name>
+									<value>love</value>
+								</property>
+								<property>
+									<name>SILENT</name>
+								</property>
+							</systemProperties>
 							<includes>
-								<include>**/Tests_31.java</include>
-								<include>**/Test_sensekey_31.java</include>
+								<include>**/JWITests.java</include>
+								<include>**/SensekeyTests.java</include>
+								<include>**/LexidTests.java</include>
 							</includes>
 						</configuration>
 					</plugin>

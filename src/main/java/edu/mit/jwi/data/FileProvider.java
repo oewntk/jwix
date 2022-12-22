@@ -71,6 +71,7 @@ import edu.mit.jwi.item.Synset;
  */
 public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
 {
+	@SuppressWarnings("CanBeFinal")
 	public static boolean verbose = false;
 
 	// final instance fields

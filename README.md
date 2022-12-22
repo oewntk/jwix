@@ -32,4 +32,4 @@ GroupID and ArtifactID on Maven Central:
 	<groupId>io.github.oewntk</groupId>
 	<artifactId>jwix</artifactId>
 	<packaging>jar</packaging>
-	<version>240.1.0</version>
+	<version>2.4.0.3</version>

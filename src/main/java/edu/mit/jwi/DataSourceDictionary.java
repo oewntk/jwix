@@ -568,18 +568,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 		return new SenseEntryFileIterator();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntriesIterator()
-	 */
-	@NonNull
-	public Iterator<ISenseEntry[]> getSenseEntriesIterator()
-	{
-		checkOpen();
-		return new SenseEntriesFileIterator();
-	}
-
 	/**
 	 * Abstract class used for iterating over line-based files.
 	 */
@@ -758,28 +746,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
 		 * @see edu.mit.wordnet.core.base.dict.Dictionary.FileIterator#parseLine(java.lang.String)
 		 */
 		public ISenseEntry parseLine(String line)
-		{
-			assert fParser != null;
-			return fParser.parseLine(line);
-		}
-	}
-
-	/**
-	 * Iterates over the sense entries file.
-	 */
-	public class SenseEntriesFileIterator extends FileIterator2<ISenseEntry[]>
-	{
-		public SenseEntriesFileIterator()
-		{
-			super(requireNonNull(requireNonNull(provider).resolveContentType(DataType.SENSES, null)));
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.wordnet.core.base.dict.Dictionary.FileIterator#parseLine(java.lang.String)
-		 */
-		public ISenseEntry[] parseLine(String line)
 		{
 			assert fParser != null;
 			return fParser.parseLine(line);

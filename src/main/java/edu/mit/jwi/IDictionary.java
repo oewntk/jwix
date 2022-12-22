@@ -205,30 +205,6 @@ public interface IDictionary extends IHasVersion, IHasLifecycle, IHasCharset
 	Iterator<ISenseEntry> getSenseEntryIterator();
 
 	/**
-	 * Retrieves the sense entries (the sense entry pool) for the specified
-	 * sense key from the database.
-	 * If the specified sense key has no associated sense entries, returns
-	 * {@code null}
-	 *
-	 * @param key the sense key of the entries to search for; may not be
-	 *            <code>null</code>
-	 * @return the entries (the pool), if found; <code>null</code> otherwise
-	 * @throws NullPointerException if the argument is <code>null</code>
-	 * @since JWI 2.4.1
-	 */
-	@Nullable
-	ISenseEntry[] getSenseEntries(ISenseKey key);
-
-	/**
-	 * Returns an iterator that will iterate over all sense entry pools in the
-	 * dictionary.
-	 *
-	 * @return an iterator that will iterate over all sense entry pools
-	 * @since JWI 2.4.0
-	 */
-	Iterator<ISenseEntry[]> getSenseEntriesIterator();
-
-	/**
 	 * Retrieves the exception entry for the specified surface form and part of
 	 * speech from the database. If the specified surface form/ part of speech
 	 * pair has no associated exception entry, returns {@code null}

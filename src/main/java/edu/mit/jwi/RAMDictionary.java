@@ -824,42 +824,12 @@ public class RAMDictionary implements IRAMDictionary
 	/*
 	 * (non-Javadoc)
 	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntries(edu.edu.mit.jwi.item.ISenseKey)
-	 */
-	@Nullable
-	public ISenseEntry[] getSenseEntries(ISenseKey key)
-	{
-		if (data != null)
-		{
-			return data.sensePools.get(key);
-		}
-		else
-		{
-			assert backing != null;
-			return backing.getSenseEntries(key);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
 	 * @see edu.mit.jwi.IDictionary#getSenseEntryIterator()
 	 */
 	@NonNull
 	public Iterator<ISenseEntry> getSenseEntryIterator()
 	{
 		return new HotSwappableSenseEntryIterator();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.mit.jwi.IDictionary#getSenseEntriesIterator()
-	 */
-	@NonNull
-	public Iterator<ISenseEntry[]> getSenseEntriesIterator()
-	{
-		return new HotSwappableSenseEntriesIterator();
 	}
 
 	/*
@@ -1186,40 +1156,6 @@ public class RAMDictionary implements IRAMDictionary
 	}
 
 	/**
-	 * A hot swappable iterator that iterates over sense entries / sense entry pools.
-	 *
-	 * @author Bernard Bou
-	 * @since JWI 2.4.1
-	 */
-	protected class HotSwappableSenseEntriesIterator extends HotSwappableIterator<ISenseEntry[]>
-	{
-		/**
-		 * Constructs a new hot swappable iterator that iterates over sense
-		 * entries.
-		 *
-		 * @throws NullPointerException if the specified part of speech is <code>null</code>
-		 * @since JWI 2.4.1
-		 */
-		public HotSwappableSenseEntriesIterator()
-		{
-			super((data == null) ? requireNonNull(backing).getSenseEntriesIterator() : data.sensePools.values().iterator(), data == null);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.RAMDictionary.HotSwappableIterator#makeIterator()
-		 */
-		@NonNull
-		@Override
-		protected Iterator<ISenseEntry[]> makeIterator()
-		{
-			assert data != null;
-			return data.sensePools.values().iterator();
-		}
-	}
-
-	/**
 	 * This runnable loads the dictionary data into memory and sets the
 	 * appropriate variable in the parent dictionary.
 	 *
@@ -1459,7 +1395,6 @@ public class RAMDictionary implements IRAMDictionary
 		protected final Map<POS, Map<IExceptionEntryID, IExceptionEntry>> exceptions;
 		protected Map<ISenseKey, IWord> words;
 		protected Map<ISenseKey, ISenseEntry> senses;
-		protected Map<ISenseKey, ISenseEntry[]> sensePools;
 
 		/**
 		 * Constructs an empty dictionary data object.
@@ -1473,7 +1408,6 @@ public class RAMDictionary implements IRAMDictionary
 			exceptions = makePOSMap();
 			words = makeMap(208000, null);
 			senses = makeMap(208000, null);
-			sensePools = makeMap(208000, null);
 		}
 
 		/**
@@ -1546,7 +1480,6 @@ public class RAMDictionary implements IRAMDictionary
 			compactPOSMap(exceptions);
 			words = compactMap(words);
 			senses = compactMap(senses);
-			sensePools = compactMap(sensePools);
 		}
 
 		/**

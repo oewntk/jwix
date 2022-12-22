@@ -1,15 +1,16 @@
 package edu.mit.jwi.test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import edu.mit.jwi.NonNull;
 import edu.mit.jwi.data.parse.DataLineParser;
 import edu.mit.jwi.data.parse.SenseKeyParser;
 import edu.mit.jwi.item.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class TestLib
 {
@@ -26,7 +27,9 @@ public class TestLib
 		//System.out.println("● sensekey=" + sk);
 		ISenseEntry senseEntry = jwi.getDict().getSenseEntry(sk);
 		if (senseEntry == null)
+		{
 			return false;
+		}
 		int offset = senseEntry.getOffset();
 		SynsetID sid = new SynsetID(offset, sk.getPOS());
 		return jwi.getDict().getSynset(sid) != null;
@@ -75,7 +78,8 @@ public class TestLib
 		});
 	}
 
-	@NonNull public static List<String> parseDataLineIntoMembers(String line)
+	@NonNull
+	public static List<String> parseDataLineIntoMembers(String line)
 	{
 		List<String> result = new ArrayList<>();
 		DataLineParser parser = DataLineParser.getInstance();
