@@ -10,6 +10,9 @@ import java.io.PrintStream;
 
 import edu.mit.jwi.item.POS;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 public class JWITests
 {
 	private static final boolean VERBOSE = !System.getProperties().containsKey("SILENT");
@@ -68,8 +71,8 @@ public class JWITests
 	@Test public void allLemmasAreNonNull()
 	{
 		jwi.forAllLemmas((l) -> {
-			Assertions.assertNotNull(l);
-			Assertions.assertFalse(l.isEmpty());
+			assertNotNull(l);
+			assertFalse(l.isEmpty());
 		});
 	}
 
