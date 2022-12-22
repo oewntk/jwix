@@ -824,25 +824,6 @@ public class CachingDictionary implements ICachingDictionary
 			reduceCacheSize(senseCache);
 		}
 
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#cacheSenseEntries(edu.edu.mit.jwi.item.ISenseEntry)
-		 */
-		public void cacheSenseEntries(@NonNull ISenseEntry[] entries)
-		{
-			checkOpen();
-			if (!isEnabled())
-			{
-				return;
-			}
-			ISenseKey sk = entries[0].getSenseKey();
-			assert sk != null;
-			assert sensesCache != null;
-			sensesCache.put(sk, entries);
-			reduceCacheSize(sensesCache);
-		}
-
 		private final Object cacheLock = new Object();
 
 		/**
@@ -911,19 +892,6 @@ public class CachingDictionary implements ICachingDictionary
 			checkOpen();
 			assert senseCache != null;
 			return senseCache.get(key);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see edu.mit.jwi.ICachingDictionary.IItemCache#retrieveSenseEntries(edu.edu.mit.jwi.item.ISenseKey)
-		 */
-		@Nullable
-		public ISenseEntry[] retrieveSenseEntries(ISenseKey key)
-		{
-			checkOpen();
-			assert sensesCache != null;
-			return sensesCache.get(key);
 		}
 	}
 }
