@@ -12,6 +12,7 @@ package edu.mit.jwi;
 
 import java.nio.charset.Charset;
 import java.util.Iterator;
+import java.util.List;
 
 import edu.mit.jwi.data.ContentTypeKey;
 import edu.mit.jwi.data.IHasCharset;
@@ -244,4 +245,16 @@ public interface IDictionary extends IHasVersion, IHasLifecycle, IHasCharset
 	 * @since JWI 1.0
 	 */
 	Iterator<IExceptionEntry> getExceptionEntryIterator(POS pos);
+
+	/**
+	 * Returns list of lemmas that have the given start.
+	 *
+	 * @param pos the part of speech over which to iterate; may not be
+	 *            <code>null</code>
+	 * @return a list of lemmas
+	 * @throws NullPointerException if the argument is <code>null</code>
+	 * @since JWIX 2.4.0.4
+	 */
+	@NonNull
+	List<String> getWords(@NonNull String start, @NonNull POS pos);
 }
