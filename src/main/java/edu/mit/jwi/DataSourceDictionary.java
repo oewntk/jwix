@@ -12,38 +12,15 @@ package edu.mit.jwi;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import edu.mit.jwi.data.ContentTypeKey;
-import edu.mit.jwi.data.DataType;
-import edu.mit.jwi.data.IContentType;
-import edu.mit.jwi.data.IDataProvider;
-import edu.mit.jwi.data.IDataSource;
-import edu.mit.jwi.data.IDataType;
+import edu.mit.jwi.data.*;
 import edu.mit.jwi.data.compare.ILineComparator;
 import edu.mit.jwi.data.parse.ILineParser;
-import edu.mit.jwi.item.ExceptionEntry;
-import edu.mit.jwi.item.ExceptionEntryID;
-import edu.mit.jwi.item.IExceptionEntry;
-import edu.mit.jwi.item.IExceptionEntryID;
-import edu.mit.jwi.item.IExceptionEntryProxy;
-import edu.mit.jwi.item.IHasPOS;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.IIndexWordID;
-import edu.mit.jwi.item.ISenseEntry;
-import edu.mit.jwi.item.ISenseKey;
-import edu.mit.jwi.item.ISynset;
-import edu.mit.jwi.item.ISynsetID;
-import edu.mit.jwi.item.IVersion;
-import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.IndexWordID;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.item.Pointer;
-import edu.mit.jwi.item.Synset;
-import edu.mit.jwi.item.SynsetID;
+import edu.mit.jwi.item.*;
 
 /**
  * Basic implementation of the {@code IDictionary} interface. A path to the
@@ -60,7 +37,9 @@ public class DataSourceDictionary implements IDataSourceDictionary
 	private static <T> T requireNonNull(@Nullable T t)
 	{
 		if (t == null)
+		{
 			throw new NullPointerException();
+		}
 		return t;
 	}
 
@@ -228,6 +207,45 @@ public class DataSourceDictionary implements IDataSourceDictionary
 		return parser.parseLine(line);
 	}
 
+	@NonNull
+	@Override
+	public List<String> getWords(@NonNull String start, @NonNull POS pos)
+	{
+		checkOpen();
+		IContentType<IIndexWord> content = provider.resolveContentType(DataType.WORD, pos);
+		assert content != null;
+		IDataType<IIndexWord> dataType = content.getDataType();
+		ILineParser<IIndexWord> parser = dataType.getParser();
+		assert parser != null;
+
+		IDataSource<?> file = provider.getSource(content);
+		assert file != null;
+
+		boolean found = false;
+		List<String> result = new ArrayList<>();
+		Iterator<String> lines = file.iterator(start);
+		while (lines.hasNext())
+		{
+			String line = lines.next();
+			if (line != null)
+			{
+				boolean match = line.startsWith(start);
+				if (match)
+				{
+					IIndexWord index = parser.parseLine(line);
+					String lemma = index.getLemma();
+					result.add(lemma);
+					found = true;
+				}
+				else if (found)
+				{
+					break;
+				}
+			}
+		}
+		return result;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -246,7 +264,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 		}
 
 		// One or the other of the WordID number or lemma may not exist,
-		// depending on whence the word id came, so we have to check 
+		// depending on whence the word id came, so we have to check
 		// them before trying.
 		if (id.getWordNumber() > 0)
 		{
@@ -456,7 +474,7 @@ public class DataSourceDictionary implements IDataSourceDictionary
 		// set head word, if we found it
 		String headLemma = headWord.getLemma();
 
-		// version 1.6 of Wordnet adds the adjective marker symbol 
+		// version 1.6 of Wordnet adds the adjective marker symbol
 		// on the end of the head word lemma
 		IVersion ver = getVersion();
 		boolean isVer16 = (ver != null) && (ver.getMajorVersion() == 1 && ver.getMinorVersion() == 6);
