@@ -49,6 +49,7 @@ import edu.mit.jwi.item.POS;
 public class DataType<T> implements IDataType<T>
 {
 	public static final DataType<IIndexWord> INDEX = new DataType<>("Index", true, IndexLineParser.getInstance(), "index", "idx");
+	public static final DataType<IIndexWord> WORD = new DataType<>("Word", true, IndexLineParser.getInstance(), "index", "idx");
 	public static final DataType<ISynset> DATA = new DataType<>("Data", true, DataLineParser.getInstance(), "data", "dat");
 	public static final DataType<IExceptionEntryProxy> EXCEPTION = new DataType<>("Exception", false, ExceptionLineParser.getInstance(), "exception", "exc");
 	public static final DataType<ISenseEntry> SENSE = new DataType<>("Sense", false, SenseLineParser.getInstance(), "sense");
@@ -224,7 +225,7 @@ public class DataType<T> implements IDataType<T>
 	 *                 not be <code>null</code>
 	 * @param pos      the part of speech whose resource name hints should be used,
 	 *                 may be <code>null</code>
-	 * @param files    the files to be search, may be empty but not <code>null</code>
+	 * @param files    the files to be searched, may be empty but not <code>null</code>
 	 * @return the file that matches both the pos and type naming conventions,
 	 * or <code>null</code> if none is found.
 	 * @throws NullPointerException if the data type or file collection is <code>null</code>
