@@ -249,6 +249,8 @@ public interface IDictionary extends IHasVersion, IHasLifecycle, IHasCharset
 	/**
 	 * Returns list of lemmas that have the given start.
 	 *
+	 * @param start start of lemmas searched for; may not be
+	 *            <code>null</code>
 	 * @param pos the part of speech over which to iterate; may not be
 	 *            <code>null</code>
 	 * @return a list of lemmas
