@@ -682,9 +682,16 @@ public class FileProvider implements IDataProvider, ILoadable, ILoadPolicy
             }
 
             // do not remove file from possible choices as both content types may use the same file
-            if (!contentType.getKey().equals(ContentTypeKey.SENSE) && !contentType.getKey().equals(ContentTypeKey.SENSES))
+            IDataType<?> dataType = contentType.getDataType();
+            if (!contentType.getKey().equals(ContentTypeKey.SENSE) && //
+                    !contentType.getKey().equals(ContentTypeKey.SENSES) && //
+                    !contentType.getKey().equals(ContentTypeKey.INDEX_ADJECTIVE) && //
+                    !contentType.getKey().equals(ContentTypeKey.INDEX_ADVERB) && //
+                    !contentType.getKey().equals(ContentTypeKey.INDEX_NOUN) && //
+                    !contentType.getKey().equals(ContentTypeKey.INDEX_VERB)
+            )
             {
-                //TODO files.remove(file);
+                files.remove(file);
             }
 
             result.put(contentType, createDataSource(file, contentType, policy));

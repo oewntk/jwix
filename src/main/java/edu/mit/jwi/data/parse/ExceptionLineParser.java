@@ -10,12 +10,12 @@
 
 package edu.mit.jwi.data.parse;
 
-import java.util.regex.Pattern;
-
 import edu.mit.jwi.NonNull;
 import edu.mit.jwi.Nullable;
 import edu.mit.jwi.item.ExceptionEntryProxy;
 import edu.mit.jwi.item.IExceptionEntryProxy;
+
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -38,66 +38,66 @@ import edu.mit.jwi.item.IExceptionEntryProxy;
  */
 public class ExceptionLineParser implements ILineParser<IExceptionEntryProxy>
 {
-	// singleton instance
-	private static ExceptionLineParser instance;
+    // singleton instance
+    private static ExceptionLineParser instance;
 
-	/**
-	 * Returns the singleton instance of this class, instantiating it if
-	 * necessary. The singleton instance will not be <code>null</code>.
-	 *
-	 * @return the non-<code>null</code> singleton instance of this class,
-	 * instantiating it if necessary.
-	 * @since JWI 2.0.0
-	 */
-	public static ExceptionLineParser getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new ExceptionLineParser();
-		}
-		return instance;
-	}
+    /**
+     * Returns the singleton instance of this class, instantiating it if
+     * necessary. The singleton instance will not be <code>null</code>.
+     *
+     * @return the non-<code>null</code> singleton instance of this class,
+     * instantiating it if necessary.
+     * @since JWI 2.0.0
+     */
+    public static ExceptionLineParser getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new ExceptionLineParser();
+        }
+        return instance;
+    }
 
-	// static fields
-	private final static Pattern spacePattern = Pattern.compile(" ");
+    // static fields
+    private final static Pattern spacePattern = Pattern.compile(" ");
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @since JWI 2.0.0
-	 */
-	protected ExceptionLineParser()
-	{
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @since JWI 2.0.0
+     */
+    protected ExceptionLineParser()
+    {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
-	 */
-	@NonNull
-	public IExceptionEntryProxy parseLine(@Nullable String line)
-	{
-		if (line == null)
-		{
-			throw new NullPointerException();
-		}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+     */
+    @NonNull
+    public IExceptionEntryProxy parseLine(@Nullable String line)
+    {
+        if (line == null)
+        {
+            throw new NullPointerException();
+        }
 
-		String[] forms = spacePattern.split(line);
-		if (forms.length < 2)
-		{
-			throw new MisformattedLineException(line);
-		}
+        String[] forms = spacePattern.split(line);
+        if (forms.length < 2)
+        {
+            throw new MisformattedLineException(line);
+        }
 
-		String surface = forms[0].trim();
+        String surface = forms[0].trim();
 
-		String[] trimmed = new String[forms.length - 1];
-		for (int i = 1; i < forms.length; i++)
-		{
-			trimmed[i - 1] = forms[i].trim();
-		}
-		return new ExceptionEntryProxy(surface, trimmed);
-	}
+        String[] trimmed = new String[forms.length - 1];
+        for (int i = 1; i < forms.length; i++)
+        {
+            trimmed[i - 1] = forms[i].trim();
+        }
+        return new ExceptionEntryProxy(surface, trimmed);
+    }
 }

@@ -21,12 +21,12 @@ package edu.mit.jwi.item;
  */
 public interface IIndexWordID extends IHasPOS, IItemID<IIndexWord>
 {
-	/**
-	 * Returns the lemma (root form) of the index word that this ID indicates.
-	 * The lemma will never be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the lemma of the index word
-	 * @since JWI 1.0
-	 */
-	String getLemma();
+    /**
+     * Returns the lemma (root form) of the index word that this ID indicates.
+     * The lemma will never be <code>null</code>, empty, or all whitespace.
+     *
+     * @return the lemma of the index word
+     * @since JWI 1.0
+     */
+    String getLemma();
 }

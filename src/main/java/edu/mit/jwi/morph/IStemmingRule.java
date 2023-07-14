@@ -10,10 +10,10 @@
 
 package edu.mit.jwi.morph;
 
-import java.util.Set;
-
 import edu.mit.jwi.Nullable;
 import edu.mit.jwi.item.IHasPOS;
+
+import java.util.Set;
 
 /**
  * A rule for deriving a stem (a.k.a., root or lemma) from a word.
@@ -24,65 +24,65 @@ import edu.mit.jwi.item.IHasPOS;
  */
 public interface IStemmingRule extends IHasPOS
 {
-	/**
-	 * Returns the suffix for this rule. Will never return <code>null</code>,
-	 * empty, or all whitespace.
-	 *
-	 * @return the suffix for this rule.
-	 * @since JWI 2.3.1
-	 */
-	@Nullable
-	String getSuffix();
+    /**
+     * Returns the suffix for this rule. Will never return <code>null</code>,
+     * empty, or all whitespace.
+     *
+     * @return the suffix for this rule.
+     * @since JWI 2.3.1
+     */
+    @Nullable
+    String getSuffix();
 
-	/**
-	 * Returns the ending for this rule. Will never return <code>null</code> ,
-	 * empty, or all whitespace.
-	 *
-	 * @return the ending for this rule.
-	 * @since JWI 2.3.1
-	 */
-	@Nullable
-	String getEnding();
+    /**
+     * Returns the ending for this rule. Will never return <code>null</code> ,
+     * empty, or all whitespace.
+     *
+     * @return the ending for this rule.
+     * @since JWI 2.3.1
+     */
+    @Nullable
+    String getEnding();
 
-	/**
-	 * Returns the set of suffixes that should be ignored when applying this
-	 * stemming rule. This method will never return <code>null</code>, but it
-	 * may return an empty set. The ignore set will not include the string
-	 * returned by {@link #getSuffix()}.
-	 *
-	 * @return a non-<code>null</code> but possibly empty set of suffixes to be
-	 * ignored
-	 * @since JWI 2.3.1
-	 */
-	Set<String> getSuffixIgnoreSet();
+    /**
+     * Returns the set of suffixes that should be ignored when applying this
+     * stemming rule. This method will never return <code>null</code>, but it
+     * may return an empty set. The ignore set will not include the string
+     * returned by {@link #getSuffix()}.
+     *
+     * @return a non-<code>null</code> but possibly empty set of suffixes to be
+     * ignored
+     * @since JWI 2.3.1
+     */
+    Set<String> getSuffixIgnoreSet();
 
-	/**
-	 * Applies this rule to the given word. The word should not be
-	 * <code>null</code>, but may be empty. If the rule cannot be applied to the
-	 * word, this method returns <code>null</code>. This call is equivalent to
-	 * calling {@link #apply(String, String)} with <code>null</code> as the
-	 * second argument
-	 *
-	 * @param word the word to which the stemming rule should be applied.
-	 * @return the root of the word, or <code>null</code> if the rule cannot be
-	 * applied to this word
-	 * @since JWI 2.3.1
-	 */
-	@Nullable
-	String apply(String word);
+    /**
+     * Applies this rule to the given word. The word should not be
+     * <code>null</code>, but may be empty. If the rule cannot be applied to the
+     * word, this method returns <code>null</code>. This call is equivalent to
+     * calling {@link #apply(String, String)} with <code>null</code> as the
+     * second argument
+     *
+     * @param word the word to which the stemming rule should be applied.
+     * @return the root of the word, or <code>null</code> if the rule cannot be
+     * applied to this word
+     * @since JWI 2.3.1
+     */
+    @Nullable
+    String apply(String word);
 
-	/**
-	 * Applies this rule to the given word, adding the specified suffix to the
-	 * end of the returned string. If the rule cannot be applied to the word,
-	 * this method returns <code>null</code>.
-	 *
-	 * @param word   the word to which the stemming rule should be applied.
-	 * @param suffix a suffix that should be appended to the root once it has been
-	 *               derived; may be <code>null</code>.
-	 * @return the root of the word, or <code>null</code> if the rule cannot be
-	 * applied to this word
-	 * @since JWI 2.3.1
-	 */
-	@Nullable
-	String apply(String word, String suffix);
+    /**
+     * Applies this rule to the given word, adding the specified suffix to the
+     * end of the returned string. If the rule cannot be applied to the word,
+     * this method returns <code>null</code>.
+     *
+     * @param word   the word to which the stemming rule should be applied.
+     * @param suffix a suffix that should be appended to the root once it has been
+     *               derived; may be <code>null</code>.
+     * @return the root of the word, or <code>null</code> if the rule cannot be
+     * applied to this word
+     * @since JWI 2.3.1
+     */
+    @Nullable
+    String apply(String word, String suffix);
 }

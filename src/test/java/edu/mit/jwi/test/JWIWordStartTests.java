@@ -13,19 +13,22 @@ public class JWIWordStartTests
 {
     private static final boolean VERBOSE = !System.getProperties().containsKey("SILENT");
 
-    private static final PrintStream PS = VERBOSE ? System.out : new PrintStream(new OutputStream() {
-        public void write(int b) {
+    private static final PrintStream PS = VERBOSE ? System.out : new PrintStream(new OutputStream()
+    {
+        public void write(int b)
+        {
             //DO NOTHING
         }
     });
 
     private static JWI jwi;
-    String start = System.getProperty("TARGET");
-    String scope = System.getProperty("TARGETSCOPE");
-    POS pos = POS.valueOf(scope);
+    final String start = System.getProperty("TARGET");
+    final String scope = System.getProperty("TARGETSCOPE");
+    final POS pos = POS.valueOf(scope);
 
     @BeforeAll
-    public static void init() throws IOException {
+    public static void init() throws IOException
+    {
         String wnHome = System.getProperty("SOURCE");
         jwi = new JWI(wnHome);
     }
@@ -33,7 +36,8 @@ public class JWIWordStartTests
     // enum
 
     @Test
-    public void searchStart() {
+    public void searchStart()
+    {
         List<String> result = jwi.getDict().getWords(start, pos);
         PS.println(start);
         PS.println(result);

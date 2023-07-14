@@ -22,93 +22,93 @@ import edu.mit.jwi.Nullable;
  */
 public class ExceptionEntry extends ExceptionEntryProxy implements IExceptionEntry
 {
-	/**
-	 * This serial version UID identifies the last version of JWI whose
-	 * serialized instances of the ExceptionEntry class are compatible with this
-	 * implementation.
-	 *
-	 * @since JWI 2.4.0
-	 */
-	private static final long serialVersionUID = 240;
+    /**
+     * This serial version UID identifies the last version of JWI whose
+     * serialized instances of the ExceptionEntry class are compatible with this
+     * implementation.
+     *
+     * @since JWI 2.4.0
+     */
+    private static final long serialVersionUID = 240;
 
-	// immutable instance fields
-	@Nullable
-	private final POS pos;
-	@NonNull
-	private final IExceptionEntryID id;
+    // immutable instance fields
+    @Nullable
+    private final POS pos;
+    @NonNull
+    private final IExceptionEntryID id;
 
-	/**
-	 * Creates a new exception entry for the specified part of speech using the
-	 * information in the specified exception proxy object.
-	 *
-	 * @param proxy the proxy containing the information for the entry
-	 * @param pos   the part of speech for the entry
-	 * @throws NullPointerException if either argument is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public ExceptionEntry(IExceptionEntryProxy proxy, @Nullable POS pos)
-	{
-		super(proxy);
-		if (pos == null)
-		{
-			throw new NullPointerException();
-		}
-		this.pos = pos;
-		this.id = new ExceptionEntryID(getSurfaceForm(), pos);
-	}
+    /**
+     * Creates a new exception entry for the specified part of speech using the
+     * information in the specified exception proxy object.
+     *
+     * @param proxy the proxy containing the information for the entry
+     * @param pos   the part of speech for the entry
+     * @throws NullPointerException if either argument is <code>null</code>
+     * @since JWI 1.0
+     */
+    public ExceptionEntry(IExceptionEntryProxy proxy, @Nullable POS pos)
+    {
+        super(proxy);
+        if (pos == null)
+        {
+            throw new NullPointerException();
+        }
+        this.pos = pos;
+        this.id = new ExceptionEntryID(getSurfaceForm(), pos);
+    }
 
-	/**
-	 * Creates a new exception entry for the specified part of speech using the
-	 * specified surface and root forms.
-	 *
-	 * @param surfaceForm the surface form for the entry
-	 * @param pos         the part of speech for the entry
-	 * @param rootForms   the root forms for the entry
-	 * @throws NullPointerException if either argument is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public ExceptionEntry(String surfaceForm, @Nullable POS pos, String... rootForms)
-	{
-		super(surfaceForm, rootForms);
-		if (pos == null)
-		{
-			throw new NullPointerException();
-		}
-		this.id = new ExceptionEntryID(getSurfaceForm(), pos);
-		this.pos = pos;
-	}
+    /**
+     * Creates a new exception entry for the specified part of speech using the
+     * specified surface and root forms.
+     *
+     * @param surfaceForm the surface form for the entry
+     * @param pos         the part of speech for the entry
+     * @param rootForms   the root forms for the entry
+     * @throws NullPointerException if either argument is <code>null</code>
+     * @since JWI 1.0
+     */
+    public ExceptionEntry(String surfaceForm, @Nullable POS pos, String... rootForms)
+    {
+        super(surfaceForm, rootForms);
+        if (pos == null)
+        {
+            throw new NullPointerException();
+        }
+        this.id = new ExceptionEntryID(getSurfaceForm(), pos);
+        this.pos = pos;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
-	 */
-	@Nullable
-	public POS getPOS()
-	{
-		return pos;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
+     */
+    @Nullable
+    public POS getPOS()
+    {
+        return pos;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IItem#getID()
-	 */
-	@NonNull
-	public IExceptionEntryID getID()
-	{
-		return id;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IItem#getID()
+     */
+    @NonNull
+    public IExceptionEntryID getID()
+    {
+        return id;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.ExceptionEntryProxy#toString()
-	 */
-	@NonNull
-	public String toString()
-	{
-		assert pos != null;
-		return super.toString() + "-" + pos;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.ExceptionEntryProxy#toString()
+     */
+    @NonNull
+    public String toString()
+    {
+        assert pos != null;
+        return super.toString() + "-" + pos;
+    }
 }

@@ -10,10 +10,10 @@
 
 package edu.mit.jwi.data.compare;
 
-import java.util.regex.Pattern;
-
 import edu.mit.jwi.Nullable;
 import edu.mit.jwi.data.parse.ILineParser.MisformattedLineException;
+
+import java.util.regex.Pattern;
 
 /**
  * <p>
@@ -33,69 +33,69 @@ import edu.mit.jwi.data.parse.ILineParser.MisformattedLineException;
  */
 public class ExceptionLineComparator implements ILineComparator
 {
-	// singleton instance
-	private static ExceptionLineComparator instance;
+    // singleton instance
+    private static ExceptionLineComparator instance;
 
-	/**
-	 * Returns the singleton instance of this class, instantiating it if
-	 * necessary. The singleton instance will not be <code>null</code>.
-	 *
-	 * @return the non-<code>null</code> singleton instance of this class,
-	 * instantiating it if necessary.
-	 * @since JWI 2.0.0
-	 */
-	public static ExceptionLineComparator getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new ExceptionLineComparator();
-		}
-		return instance;
-	}
+    /**
+     * Returns the singleton instance of this class, instantiating it if
+     * necessary. The singleton instance will not be <code>null</code>.
+     *
+     * @return the non-<code>null</code> singleton instance of this class,
+     * instantiating it if necessary.
+     * @since JWI 2.0.0
+     */
+    public static ExceptionLineComparator getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new ExceptionLineComparator();
+        }
+        return instance;
+    }
 
-	// static fields
-	private final static Pattern spacePattern = Pattern.compile(" ");
+    // static fields
+    private final static Pattern spacePattern = Pattern.compile(" ");
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @since JWI 2.0.0
-	 */
-	protected ExceptionLineComparator()
-	{
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @since JWI 2.0.0
+     */
+    protected ExceptionLineComparator()
+    {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-	 */
-	public int compare(String line1, String line2)
-	{
-		String[] words1 = spacePattern.split(line1);
-		String[] words2 = spacePattern.split(line2);
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+     */
+    public int compare(String line1, String line2)
+    {
+        String[] words1 = spacePattern.split(line1);
+        String[] words2 = spacePattern.split(line2);
 
-		if (words1.length < 1)
-		{
-			throw new MisformattedLineException(line1);
-		}
-		if (words2.length < 1)
-		{
-			throw new MisformattedLineException(line2);
-		}
-		return words1[0].compareTo(words2[0]);
-	}
+        if (words1.length < 1)
+        {
+            throw new MisformattedLineException(line1);
+        }
+        if (words2.length < 1)
+        {
+            throw new MisformattedLineException(line2);
+        }
+        return words1[0].compareTo(words2[0]);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.compare.ILineComparator#getCommentDetector()
-	 */
-	@Nullable
-	public ICommentDetector getCommentDetector()
-	{
-		return null;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.compare.ILineComparator#getCommentDetector()
+     */
+    @Nullable
+    public ICommentDetector getCommentDetector()
+    {
+        return null;
+    }
 }

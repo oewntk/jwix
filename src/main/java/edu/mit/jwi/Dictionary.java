@@ -10,12 +10,12 @@
 
 package edu.mit.jwi;
 
-import java.io.File;
-import java.net.URL;
-
 import edu.mit.jwi.data.ContentTypeKey;
 import edu.mit.jwi.data.FileProvider;
 import edu.mit.jwi.item.Word;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * Basic {@code IDictionary} implementation that mounts files on disk and has
@@ -28,108 +28,108 @@ import edu.mit.jwi.item.Word;
  */
 public class Dictionary extends CachingDictionary
 {
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified url
-	 *
-	 * @param wordnetDir a url pointing to a directory containing the wordnet data
-	 *                   files on the filesystem
-	 * @throws NullPointerException if the specified url is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(URL wordnetDir)
-	{
-		this(wordnetDir, null);
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified url
+     *
+     * @param wordnetDir an url pointing to a directory containing the wordnet data
+     *                   files on the filesystem
+     * @throws NullPointerException if the specified url is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(URL wordnetDir)
+    {
+        this(wordnetDir, null);
+    }
 
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified url
-	 *
-	 * @param wordnetDir a url pointing to a directory containing the wordnet data
-	 *                   files on the filesystem
-	 * @param config     config parameters
-	 * @throws NullPointerException if the specified url is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(URL wordnetDir, Config config)
-	{
-		super(new DataSourceDictionary(new FileProvider(wordnetDir)));
-		configure(config);
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified url
+     *
+     * @param wordnetDir an url pointing to a directory containing the wordnet data
+     *                   files on the filesystem
+     * @param config     config parameters
+     * @throws NullPointerException if the specified url is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(URL wordnetDir, Config config)
+    {
+        super(new DataSourceDictionary(new FileProvider(wordnetDir)));
+        configure(config);
+    }
 
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified file
-	 *
-	 * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
-	 * @throws NullPointerException if the specified file is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(File wordnetDir)
-	{
-		this(wordnetDir, null);
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified file
+     *
+     * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
+     * @throws NullPointerException if the specified file is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(File wordnetDir)
+    {
+        this(wordnetDir, null);
+    }
 
-	/**
-	 * Constructs a new dictionary that uses the Wordnet files located in a
-	 * directory pointed to by the specified file
-	 *
-	 * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
-	 * @param config     config parameters
-	 * @throws NullPointerException if the specified file is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public Dictionary(File wordnetDir, Config config)
-	{
-		super(new DataSourceDictionary(new FileProvider(wordnetDir)));
-		configure(config);
-	}
+    /**
+     * Constructs a new dictionary that uses the Wordnet files located in a
+     * directory pointed to by the specified file
+     *
+     * @param wordnetDir a file pointing to a directory containing the wordnet data files on the filesystem
+     * @param config     config parameters
+     * @throws NullPointerException if the specified file is <code>null</code>
+     * @since JWI 1.0
+     */
+    public Dictionary(File wordnetDir, Config config)
+    {
+        super(new DataSourceDictionary(new FileProvider(wordnetDir)));
+        configure(config);
+    }
 
-	private void configure(@Nullable Config config)
-	{
-		if (config == null)
-		{
-			return;
-		}
+    private void configure(@Nullable Config config)
+    {
+        if (config == null)
+        {
+            return;
+        }
 
-		// global params
-		if (config.checkLexicalId != null)
-		{
-			Word.setCheckLexicalId(config.checkLexicalId);
-		}
+        // global params
+        if (config.checkLexicalId != null)
+        {
+            Word.setCheckLexicalId(config.checkLexicalId);
+        }
 
-		// dictionary params
-		if (config.indexNounComparator != null)
-		{
-			setComparator(ContentTypeKey.INDEX_NOUN, config.indexNounComparator);
-		}
-		if (config.indexVerbComparator != null)
-		{
-			setComparator(ContentTypeKey.INDEX_VERB, config.indexVerbComparator);
-		}
-		if (config.indexAdjectiveComparator != null)
-		{
-			setComparator(ContentTypeKey.INDEX_ADJECTIVE, config.indexAdjectiveComparator);
-		}
-		if (config.indexAdverbComparator != null)
-		{
-			setComparator(ContentTypeKey.INDEX_ADVERB, config.indexAdverbComparator);
-		}
+        // dictionary params
+        if (config.indexNounComparator != null)
+        {
+            setComparator(ContentTypeKey.INDEX_NOUN, config.indexNounComparator);
+        }
+        if (config.indexVerbComparator != null)
+        {
+            setComparator(ContentTypeKey.INDEX_VERB, config.indexVerbComparator);
+        }
+        if (config.indexAdjectiveComparator != null)
+        {
+            setComparator(ContentTypeKey.INDEX_ADJECTIVE, config.indexAdjectiveComparator);
+        }
+        if (config.indexAdverbComparator != null)
+        {
+            setComparator(ContentTypeKey.INDEX_ADVERB, config.indexAdverbComparator);
+        }
 
-		if (config.indexSensePattern != null)
-		{
-			setSourceMatcher(ContentTypeKey.SENSE, config.indexSensePattern);
-			setSourceMatcher(ContentTypeKey.SENSES, config.indexSensePattern);
-		}
-		if (config.indexSenseKeyComparator != null)
-		{
-			setComparator(ContentTypeKey.SENSE, config.indexSenseKeyComparator);
-			setComparator(ContentTypeKey.SENSES, config.indexSenseKeyComparator);
-		}
-		if (config.charSet != null)
-		{
-			setCharset(config.charSet);
-		}
-	}
+        if (config.indexSensePattern != null)
+        {
+            setSourceMatcher(ContentTypeKey.SENSE, config.indexSensePattern);
+            setSourceMatcher(ContentTypeKey.SENSES, config.indexSensePattern);
+        }
+        if (config.indexSenseKeyComparator != null)
+        {
+            setComparator(ContentTypeKey.SENSE, config.indexSenseKeyComparator);
+            setComparator(ContentTypeKey.SENSES, config.indexSenseKeyComparator);
+        }
+        if (config.charSet != null)
+        {
+            setCharset(config.charSet);
+        }
+    }
 }

@@ -10,9 +10,9 @@
 
 package edu.mit.jwi.data.compare;
 
-import java.util.Comparator;
-
 import edu.mit.jwi.NonNull;
+
+import java.util.Comparator;
 
 /**
  * <p>
@@ -33,79 +33,79 @@ import edu.mit.jwi.NonNull;
  */
 public class CommentComparator implements Comparator<String>, ICommentDetector
 {
-	// singleton instance
-	private static CommentComparator instance;
+    // singleton instance
+    private static CommentComparator instance;
 
-	/**
-	 * Returns the singleton instance of this class, instantiating it if
-	 * necessary. The singleton instance will not be <code>null</code>.
-	 *
-	 * @return the non-<code>null</code> singleton instance of this class,
-	 * instantiating it if necessary.
-	 * @since JWI 2.0.0
-	 */
-	public static CommentComparator getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new CommentComparator();
-		}
-		return instance;
-	}
+    /**
+     * Returns the singleton instance of this class, instantiating it if
+     * necessary. The singleton instance will not be <code>null</code>.
+     *
+     * @return the non-<code>null</code> singleton instance of this class,
+     * instantiating it if necessary.
+     * @since JWI 2.0.0
+     */
+    public static CommentComparator getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new CommentComparator();
+        }
+        return instance;
+    }
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @since JWI 2.0.0
-	 */
-	protected CommentComparator()
-	{
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @since JWI 2.0.0
+     */
+    protected CommentComparator()
+    {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-	 */
-	public int compare(String s1, String s2)
-	{
-		s1 = s1.trim();
-		s2 = s2.trim();
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+     */
+    public int compare(String s1, String s2)
+    {
+        s1 = s1.trim();
+        s2 = s2.trim();
 
-		int idx1 = s1.indexOf(' ');
-		int idx2 = s2.indexOf(' ');
-		if (idx1 == -1)
-		{
-			idx1 = s1.length();
-		}
-		if (idx2 == -1)
-		{
-			idx2 = s2.length();
-		}
+        int idx1 = s1.indexOf(' ');
+        int idx2 = s2.indexOf(' ');
+        if (idx1 == -1)
+        {
+            idx1 = s1.length();
+        }
+        if (idx2 == -1)
+        {
+            idx2 = s2.length();
+        }
 
-		int num1 = Integer.parseInt(s1.substring(0, idx1));
-		int num2 = Integer.parseInt(s2.substring(0, idx2));
+        int num1 = Integer.parseInt(s1.substring(0, idx1));
+        int num2 = Integer.parseInt(s2.substring(0, idx2));
 
-		if (num1 < num2)
-		{
-			return -1;
-		}
-		else if (num1 > num2)
-		{
-			return 1;
-		}
-		return 0;
-	}
+        if (num1 < num2)
+        {
+            return -1;
+        }
+        else if (num1 > num2)
+        {
+            return 1;
+        }
+        return 0;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.compare.ICommentDetector#isCommentLine(java.lang.String)
-	 */
-	public boolean isCommentLine(@NonNull String line)
-	{
-		return line.length() >= 2 && line.charAt(0) == ' ' && line.charAt(1) == ' ';
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.compare.ICommentDetector#isCommentLine(java.lang.String)
+     */
+    public boolean isCommentLine(@NonNull String line)
+    {
+        return line.length() >= 2 && line.charAt(0) == ' ' && line.charAt(1) == ' ';
+    }
 }

@@ -23,15 +23,15 @@ import java.util.Comparator;
  */
 public interface ICommentDetector extends Comparator<String>
 {
-	/**
-	 * Returns <code>true</code> if the specified string is a comment line,
-	 * <code>false</code> otherwise.
-	 *
-	 * @param line the line to be analyzed
-	 * @return <code>true</code> if the specified string is a comment line,
-	 * <code>false</code> otherwise.
-	 * @throws NullPointerException if the specified line is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	boolean isCommentLine(String line);
+    /**
+     * Returns <code>true</code> if the specified string is a comment line,
+     * <code>false</code> otherwise.
+     *
+     * @param line the line to be analyzed
+     * @return <code>true</code> if the specified string is a comment line,
+     * <code>false</code> otherwise.
+     * @throws NullPointerException if the specified line is <code>null</code>
+     * @since JWI 1.0
+     */
+    boolean isCommentLine(String line);
 }

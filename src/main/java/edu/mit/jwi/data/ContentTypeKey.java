@@ -21,42 +21,42 @@ import edu.mit.jwi.item.POS;
  */
 public enum ContentTypeKey
 {
-	INDEX_NOUN(DataType.INDEX, POS.NOUN), //
-	INDEX_VERB(DataType.INDEX, POS.VERB), //
-	INDEX_ADVERB(DataType.INDEX, POS.ADVERB), //
-	INDEX_ADJECTIVE(DataType.INDEX, POS.ADJECTIVE), //
-	WORD_NOUN(DataType.WORD, POS.NOUN), //
-	WORD_VERB(DataType.WORD, POS.VERB), //
-	WORD_ADVERB(DataType.WORD, POS.ADVERB), //
-	WORD_ADJECTIVE(DataType.WORD, POS.ADJECTIVE), //
-	DATA_NOUN(DataType.DATA, POS.NOUN), //
-	DATA_VERB(DataType.DATA, POS.VERB), //
-	DATA_ADVERB(DataType.DATA, POS.ADVERB), //
-	DATA_ADJECTIVE(DataType.DATA, POS.ADJECTIVE), //
-	EXCEPTION_NOUN(DataType.EXCEPTION, POS.NOUN), //
-	EXCEPTION_VERB(DataType.EXCEPTION, POS.VERB), //
-	EXCEPTION_ADVERB(DataType.EXCEPTION, POS.ADVERB), //
-	EXCEPTION_ADJECTIVE(DataType.EXCEPTION, POS.ADJECTIVE), //
-	SENSE(DataType.SENSE, null), SENSES(DataType.SENSES, null);
+    INDEX_NOUN(DataType.INDEX, POS.NOUN), //
+    INDEX_VERB(DataType.INDEX, POS.VERB), //
+    INDEX_ADVERB(DataType.INDEX, POS.ADVERB), //
+    INDEX_ADJECTIVE(DataType.INDEX, POS.ADJECTIVE), //
+    WORD_NOUN(DataType.WORD, POS.NOUN), //
+    WORD_VERB(DataType.WORD, POS.VERB), //
+    WORD_ADVERB(DataType.WORD, POS.ADVERB), //
+    WORD_ADJECTIVE(DataType.WORD, POS.ADJECTIVE), //
+    DATA_NOUN(DataType.DATA, POS.NOUN), //
+    DATA_VERB(DataType.DATA, POS.VERB), //
+    DATA_ADVERB(DataType.DATA, POS.ADVERB), //
+    DATA_ADJECTIVE(DataType.DATA, POS.ADJECTIVE), //
+    EXCEPTION_NOUN(DataType.EXCEPTION, POS.NOUN), //
+    EXCEPTION_VERB(DataType.EXCEPTION, POS.VERB), //
+    EXCEPTION_ADVERB(DataType.EXCEPTION, POS.ADVERB), //
+    EXCEPTION_ADJECTIVE(DataType.EXCEPTION, POS.ADJECTIVE), //
+    SENSE(DataType.SENSE, null), SENSES(DataType.SENSES, null);
 
-	private final IDataType<?> fType;
+    private final IDataType<?> fType;
 
-	private final POS fPOS;
+    private final POS fPOS;
 
-	ContentTypeKey(IDataType<?> fType, POS fPOS)
-	{
-		this.fType = fType;
-		this.fPOS = fPOS;
-	}
+    ContentTypeKey(IDataType<?> fType, POS fPOS)
+    {
+        this.fType = fType;
+        this.fPOS = fPOS;
+    }
 
-	public <T> IDataType<T> getDataType()
-	{
-		//noinspection unchecked
-		return (IDataType<T>) fType;
-	}
+    public <T> IDataType<T> getDataType()
+    {
+        //noinspection unchecked
+        return (IDataType<T>) fType;
+    }
 
-	public POS getPOS()
-	{
-		return fPOS;
-	}
+    public POS getPOS()
+    {
+        return fPOS;
+    }
 }

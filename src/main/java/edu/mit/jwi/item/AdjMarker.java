@@ -22,71 +22,71 @@ import edu.mit.jwi.Nullable;
  */
 public enum AdjMarker
 {
-	PREDICATE("(p)", "predicate position"), PRENOMINAL("(a)", "prenominal (attributive) position"), POSTNOMINAL("(ip)", "immediately postnominal position");
+    PREDICATE("(p)", "predicate position"), PRENOMINAL("(a)", "prenominal (attributive) position"), POSTNOMINAL("(ip)", "immediately postnominal position");
 
-	// unmodifiable fields
-	@Nullable
-	private final String symbol;
-	@Nullable
-	private final String description;
+    // unmodifiable fields
+    @Nullable
+    private final String symbol;
+    @Nullable
+    private final String description;
 
-	/**
-	 * Constructs a new adjective marker with the specified symbol and
-	 * description
-	 *
-	 * @param symbol      the symbol, may neither be <code>null</code> nor empty
-	 * @param description the description, may neither be <code>null</code> nor empty
-	 * @throws NullPointerException     if either argument is <code>null</code>
-	 * @throws IllegalArgumentException if either argument is empty or all whitespace
-	 * @since JWI 2.1.0
-	 */
-	AdjMarker(@Nullable String symbol, @Nullable String description)
-	{
-		if (symbol == null)
-		{
-			throw new NullPointerException();
-		}
-		if (description == null)
-		{
-			throw new NullPointerException();
-		}
-		symbol = symbol.trim();
-		description = description.trim();
-		if (symbol.length() == 0)
-		{
-			throw new IllegalArgumentException();
-		}
-		if (description.length() == 0)
-		{
-			throw new IllegalArgumentException();
-		}
-		this.symbol = symbol;
-		this.description = description;
-	}
+    /**
+     * Constructs a new adjective marker with the specified symbol and
+     * description
+     *
+     * @param symbol      the symbol, may neither be <code>null</code> nor empty
+     * @param description the description, may neither be <code>null</code> nor empty
+     * @throws NullPointerException     if either argument is <code>null</code>
+     * @throws IllegalArgumentException if either argument is empty or all whitespace
+     * @since JWI 2.1.0
+     */
+    AdjMarker(@Nullable String symbol, @Nullable String description)
+    {
+        if (symbol == null)
+        {
+            throw new NullPointerException();
+        }
+        if (description == null)
+        {
+            throw new NullPointerException();
+        }
+        symbol = symbol.trim();
+        description = description.trim();
+        if (symbol.length() == 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        if (description.length() == 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        this.symbol = symbol;
+        this.description = description;
+    }
 
-	/**
-	 * Returns the adjective marker symbol, as found appended to the ends of
-	 * adjective words in the data files, parenthesis included.
-	 *
-	 * @return the symbol for this adjective marker
-	 * @since JWI 2.1.0
-	 */
-	@Nullable
-	public String getSymbol()
-	{
-		return symbol;
-	}
+    /**
+     * Returns the adjective marker symbol, as found appended to the ends of
+     * adjective words in the data files, parenthesis included.
+     *
+     * @return the symbol for this adjective marker
+     * @since JWI 2.1.0
+     */
+    @Nullable
+    public String getSymbol()
+    {
+        return symbol;
+    }
 
-	/**
-	 * Returns a user-readable description of the type of marker, drawn from the
-	 * Wordnet specification.
-	 *
-	 * @return a user-readable description of the marker
-	 * @since JWI 2.1.0
-	 */
-	@Nullable
-	public String getDescription()
-	{
-		return description;
-	}
+    /**
+     * Returns a user-readable description of the type of marker, drawn from the
+     * Wordnet specification.
+     *
+     * @return a user-readable description of the marker
+     * @since JWI 2.1.0
+     */
+    @Nullable
+    public String getDescription()
+    {
+        return description;
+    }
 }

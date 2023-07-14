@@ -19,5 +19,5 @@ package edu.mit.jwi.data;
  */
 public interface ILoadableDataSource<T> extends IDataSource<T>, ILoadable
 {
-	// no methods
+    // no methods
 }

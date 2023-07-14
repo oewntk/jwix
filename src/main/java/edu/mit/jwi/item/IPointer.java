@@ -10,9 +10,9 @@
 
 package edu.mit.jwi.item;
 
-import java.io.Serializable;
-
 import edu.mit.jwi.NonNull;
+
+import java.io.Serializable;
 
 /**
  * A pointer is a marker object that represents different types of relationships
@@ -24,23 +24,23 @@ import edu.mit.jwi.NonNull;
  */
 public interface IPointer extends Serializable
 {
-	/**
-	 * The symbol in the Wordnet data files that is used to indicate this
-	 * pointer type. Will not be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the symbol for this pointer
-	 * @since JWI 2.0.0
-	 */
-	@NonNull
-	String getSymbol();
+    /**
+     * The symbol in the Wordnet data files that is used to indicate this
+     * pointer type. Will not be <code>null</code>, empty, or all whitespace.
+     *
+     * @return the symbol for this pointer
+     * @since JWI 2.0.0
+     */
+    @NonNull
+    String getSymbol();
 
-	/**
-	 * Returns a user-friendly name of this pointer type for identification
-	 * purposes. Will not be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the user-friendly name of this pointer
-	 * @since JWI 2.0.0
-	 */
-	@NonNull
-	String getName();
+    /**
+     * Returns a user-friendly name of this pointer type for identification
+     * purposes. Will not be <code>null</code>, empty, or all whitespace.
+     *
+     * @return the user-friendly name of this pointer
+     * @since JWI 2.0.0
+     */
+    @NonNull
+    String getName();
 }

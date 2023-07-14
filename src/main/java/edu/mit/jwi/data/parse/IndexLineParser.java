@@ -10,18 +10,11 @@
 
 package edu.mit.jwi.data.parse;
 
-import java.util.StringTokenizer;
-
 import edu.mit.jwi.NonNull;
 import edu.mit.jwi.Nullable;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.IPointer;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.IndexWord;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.item.Pointer;
-import edu.mit.jwi.item.SynsetID;
-import edu.mit.jwi.item.WordID;
+import edu.mit.jwi.item.*;
+
+import java.util.StringTokenizer;
 
 /**
  * <p>
@@ -39,117 +32,117 @@ import edu.mit.jwi.item.WordID;
  */
 public class IndexLineParser implements ILineParser<IIndexWord>
 {
-	// singleton instance
-	private static IndexLineParser instance;
+    // singleton instance
+    private static IndexLineParser instance;
 
-	/**
-	 * Returns the singleton instance of this class, instantiating it if
-	 * necessary. The singleton instance will not be <code>null</code>.
-	 *
-	 * @return the non-<code>null</code> singleton instance of this class,
-	 * instantiating it if necessary.
-	 * @since JWI 2.0.0
-	 */
-	public static IndexLineParser getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new IndexLineParser();
-		}
-		return instance;
-	}
+    /**
+     * Returns the singleton instance of this class, instantiating it if
+     * necessary. The singleton instance will not be <code>null</code>.
+     *
+     * @return the non-<code>null</code> singleton instance of this class,
+     * instantiating it if necessary.
+     * @since JWI 2.0.0
+     */
+    public static IndexLineParser getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new IndexLineParser();
+        }
+        return instance;
+    }
 
-	/**
-	 * This constructor is marked protected so that the class may be
-	 * sub-classed, but not directly instantiated. Obtain instances of this
-	 * class via the static {@link #getInstance()} method.
-	 *
-	 * @since JWI 2.0.0
-	 */
-	protected IndexLineParser()
-	{
-	}
+    /**
+     * This constructor is marked protected so that the class may be
+     * sub-classed, but not directly instantiated. Obtain instances of this
+     * class via the static {@link #getInstance()} method.
+     *
+     * @since JWI 2.0.0
+     */
+    protected IndexLineParser()
+    {
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
-	 */
-	@NonNull
-	public IIndexWord parseLine(@Nullable String line)
-	{
-		if (line == null)
-		{
-			throw new NullPointerException();
-		}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.data.parse.ILineParser#parseLine(java.lang.String)
+     */
+    @NonNull
+    public IIndexWord parseLine(@Nullable String line)
+    {
+        if (line == null)
+        {
+            throw new NullPointerException();
+        }
 
-		try
-		{
-			StringTokenizer tokenizer = new StringTokenizer(line, " ");
+        try
+        {
+            StringTokenizer tokenizer = new StringTokenizer(line, " ");
 
-			// get lemma
-			String lemma = tokenizer.nextToken();
+            // get lemma
+            String lemma = tokenizer.nextToken();
 
-			// get pos
-			String posSym = tokenizer.nextToken();
-			POS pos = POS.getPartOfSpeech(posSym.charAt(0));
+            // get pos
+            String posSym = tokenizer.nextToken();
+            POS pos = POS.getPartOfSpeech(posSym.charAt(0));
 
-			// consume synset_cnt
-			tokenizer.nextToken();
+            // consume synset_cnt
+            tokenizer.nextToken();
 
-			// consume ptr_symbols
-			int p_cnt = Integer.parseInt(tokenizer.nextToken());
-			IPointer[] ptrs = new IPointer[p_cnt];
-			String tok;
-			for (int i = 0; i < p_cnt; ++i)
-			{
-				tok = tokenizer.nextToken();
-				ptrs[i] = resolvePointer(tok, pos);
-			}
+            // consume ptr_symbols
+            int p_cnt = Integer.parseInt(tokenizer.nextToken());
+            IPointer[] ptrs = new IPointer[p_cnt];
+            String tok;
+            for (int i = 0; i < p_cnt; ++i)
+            {
+                tok = tokenizer.nextToken();
+                ptrs[i] = resolvePointer(tok, pos);
+            }
 
-			// get sense_cnt
-			int senseCount = Integer.parseInt(tokenizer.nextToken());
+            // get sense_cnt
+            int senseCount = Integer.parseInt(tokenizer.nextToken());
 
-			// get tagged sense count
-			int tagSenseCnt = Integer.parseInt(tokenizer.nextToken());
+            // get tagged sense count
+            int tagSenseCnt = Integer.parseInt(tokenizer.nextToken());
 
-			// get words
-			IWordID[] words = new IWordID[senseCount];
-			int offset;
-			for (int i = 0; i < senseCount; i++)
-			{
-				offset = Integer.parseInt(tokenizer.nextToken());
-				words[i] = new WordID(new SynsetID(offset, pos), lemma);
-			}
-			return new IndexWord(lemma, pos, tagSenseCnt, ptrs, words);
-		}
-		catch (Exception e)
-		{
-			throw new MisformattedLineException(line, e);
-		}
-	}
+            // get words
+            IWordID[] words = new IWordID[senseCount];
+            int offset;
+            for (int i = 0; i < senseCount; i++)
+            {
+                offset = Integer.parseInt(tokenizer.nextToken());
+                words[i] = new WordID(new SynsetID(offset, pos), lemma);
+            }
+            return new IndexWord(lemma, pos, tagSenseCnt, ptrs, words);
+        }
+        catch (Exception e)
+        {
+            throw new MisformattedLineException(line, e);
+        }
+    }
 
-	/**
-	 * <p>
-	 * Retrieves the pointer objects for the {@link #parseLine(String)} method.
-	 * </p>
-	 * <p>
-	 * This is implemented in its own method for ease of subclassing.
-	 * </p>
-	 *
-	 * @param symbol the symbol of the pointer to return
-	 * @param pos    the part of speech of the pointer to return, can be
-	 *               <code>null</code> unless the pointer symbol is ambiguous
-	 * @return the pointer corresponding to the specified symbol and part of
-	 * speech combination
-	 * @throws NullPointerException     if the symbol is <code>null</code>
-	 * @throws IllegalArgumentException if the symbol and part of speech combination does not
-	 *                                  correspond to a known pointer
-	 * @since JWI 2.3.0
-	 */
-	@Nullable
-	protected IPointer resolvePointer(@NonNull String symbol, POS pos)
-	{
-		return Pointer.getPointerType(symbol, pos);
-	}
+    /**
+     * <p>
+     * Retrieves the pointer objects for the {@link #parseLine(String)} method.
+     * </p>
+     * <p>
+     * This is implemented in its own method for ease of subclassing.
+     * </p>
+     *
+     * @param symbol the symbol of the pointer to return
+     * @param pos    the part of speech of the pointer to return, can be
+     *               <code>null</code> unless the pointer symbol is ambiguous
+     * @return the pointer corresponding to the specified symbol and part of
+     * speech combination
+     * @throws NullPointerException     if the symbol is <code>null</code>
+     * @throws IllegalArgumentException if the symbol and part of speech combination does not
+     *                                  correspond to a known pointer
+     * @since JWI 2.3.0
+     */
+    @Nullable
+    protected IPointer resolvePointer(@NonNull String symbol, POS pos)
+    {
+        return Pointer.getPointerType(symbol, pos);
+    }
 }

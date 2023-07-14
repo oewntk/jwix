@@ -22,156 +22,156 @@ import edu.mit.jwi.Nullable;
  */
 public class ExceptionEntryID implements IExceptionEntryID
 {
-	/**
-	 * Generated serial version id.
-	 *
-	 * @since JWI 2.2.5
-	 */
-	private static final long serialVersionUID = -8891377527593261453L;
+    /**
+     * Generated serial version id.
+     *
+     * @since JWI 2.2.5
+     */
+    private static final long serialVersionUID = -8891377527593261453L;
 
-	// immutable instance fields
-	@NonNull
-	private final String surfaceForm;
-	@Nullable
-	private final POS pos;
+    // immutable instance fields
+    @NonNull
+    private final String surfaceForm;
+    @Nullable
+    private final POS pos;
 
-	/**
-	 * Creates a new exception entry id with the specified information.
-	 *
-	 * @param surfaceForm the surface form for the entry
-	 * @param pos         the part of speech for the entry
-	 * @throws NullPointerException     if either argument is <code>null</code>
-	 * @throws IllegalArgumentException if the surface form is empty or all whitespace
-	 * @since JWI 1.0
-	 */
-	public ExceptionEntryID(@Nullable String surfaceForm, @Nullable POS pos)
-	{
-		if (pos == null)
-		{
-			throw new NullPointerException();
-		}
-		if (surfaceForm == null)
-		{
-			throw new NullPointerException();
-		}
-		surfaceForm = surfaceForm.trim();
-		if (surfaceForm.length() == 0)
-		{
-			throw new IllegalArgumentException();
-		}
-		// all exception entries are lower-case
-		// this call also checks for null
-		this.surfaceForm = surfaceForm.toLowerCase();
-		this.pos = pos;
-	}
+    /**
+     * Creates a new exception entry id with the specified information.
+     *
+     * @param surfaceForm the surface form for the entry
+     * @param pos         the part of speech for the entry
+     * @throws NullPointerException     if either argument is <code>null</code>
+     * @throws IllegalArgumentException if the surface form is empty or all whitespace
+     * @since JWI 1.0
+     */
+    public ExceptionEntryID(@Nullable String surfaceForm, @Nullable POS pos)
+    {
+        if (pos == null)
+        {
+            throw new NullPointerException();
+        }
+        if (surfaceForm == null)
+        {
+            throw new NullPointerException();
+        }
+        surfaceForm = surfaceForm.trim();
+        if (surfaceForm.length() == 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        // all exception entries are lower-case
+        // this call also checks for null
+        this.surfaceForm = surfaceForm.toLowerCase();
+        this.pos = pos;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IExceptionEntryID#getSurfaceForm()
-	 */
-	@NonNull
-	public String getSurfaceForm()
-	{
-		return surfaceForm;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IExceptionEntryID#getSurfaceForm()
+     */
+    @NonNull
+    public String getSurfaceForm()
+    {
+        return surfaceForm;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
-	 */
-	@Nullable
-	public POS getPOS()
-	{
-		return pos;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IHasPOS#getPOS()
+     */
+    @Nullable
+    public POS getPOS()
+    {
+        return pos;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	@NonNull
-	public String toString()
-	{
-		assert pos != null;
-		return "EID-" + surfaceForm + "-" + pos.getTag();
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @NonNull
+    public String toString()
+    {
+        assert pos != null;
+        return "EID-" + surfaceForm + "-" + pos.getTag();
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode()
-	{
-		final int PRIME = 31;
-		int result = 1;
-		result = PRIME * result + surfaceForm.hashCode();
-		assert pos != null;
-		result = PRIME * result + pos.hashCode();
-		return result;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode()
+    {
+        final int PRIME = 31;
+        int result = 1;
+        result = PRIME * result + surfaceForm.hashCode();
+        assert pos != null;
+        result = PRIME * result + pos.hashCode();
+        return result;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(@Nullable Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
-		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (!(obj instanceof IExceptionEntryID))
-		{
-			return false;
-		}
-		final IExceptionEntryID other = (IExceptionEntryID) obj;
-		if (!surfaceForm.equals(other.getSurfaceForm()))
-		{
-			return false;
-		}
-		assert pos != null;
-		return pos.equals(other.getPOS());
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(@Nullable Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (!(obj instanceof IExceptionEntryID))
+        {
+            return false;
+        }
+        final IExceptionEntryID other = (IExceptionEntryID) obj;
+        if (!surfaceForm.equals(other.getSurfaceForm()))
+        {
+            return false;
+        }
+        assert pos != null;
+        return pos.equals(other.getPOS());
+    }
 
-	/**
-	 * Convenience method for transforming the result of the {@link #toString()}
-	 * method back into an {@code IExceptionEntryID}.
-	 *
-	 * @param value the string to parse
-	 * @return the derived exception entry id
-	 * @throws NullPointerException     if the specified string is <code>null</code>
-	 * @throws IllegalArgumentException if the specified string does not conform to an exception
-	 *                                  entry id
-	 * @since JWI 2.2.0
-	 */
-	@NonNull
-	public static ExceptionEntryID parseExceptionEntryID(@Nullable String value)
-	{
-		if (value == null)
-		{
-			throw new NullPointerException();
-		}
+    /**
+     * Convenience method for transforming the result of the {@link #toString()}
+     * method back into an {@code IExceptionEntryID}.
+     *
+     * @param value the string to parse
+     * @return the derived exception entry id
+     * @throws NullPointerException     if the specified string is <code>null</code>
+     * @throws IllegalArgumentException if the specified string does not conform to an exception
+     *                                  entry id
+     * @since JWI 2.2.0
+     */
+    @NonNull
+    public static ExceptionEntryID parseExceptionEntryID(@Nullable String value)
+    {
+        if (value == null)
+        {
+            throw new NullPointerException();
+        }
 
-		if (!value.startsWith("EID-"))
-		{
-			throw new IllegalArgumentException();
-		}
+        if (!value.startsWith("EID-"))
+        {
+            throw new IllegalArgumentException();
+        }
 
-		if (value.charAt(value.length() - 2) != '-')
-		{
-			throw new IllegalArgumentException();
-		}
+        if (value.charAt(value.length() - 2) != '-')
+        {
+            throw new IllegalArgumentException();
+        }
 
-		POS pos = POS.getPartOfSpeech(value.charAt(value.length() - 1));
-		return new ExceptionEntryID(value.substring(4, value.length() - 2), pos);
-	}
+        POS pos = POS.getPartOfSpeech(value.charAt(value.length() - 1));
+        return new ExceptionEntryID(value.substring(4, value.length() - 2), pos);
+    }
 }

@@ -23,31 +23,31 @@ import java.io.Serializable;
  */
 public interface ILexFile extends IHasPOS, Serializable
 {
-	/**
-	 * Returns the number of the lexicographer file. This is used in sense keys
-	 * and the data files. A lexical file number is always in the closed range
-	 * [0, 99].
-	 *
-	 * @return the lexicograph file number, between 0 and 99, inclusive.
-	 * @since JWI 2.1.0
-	 */
-	int getNumber();
+    /**
+     * Returns the number of the lexicographer file. This is used in sense keys
+     * and the data files. A lexical file number is always in the closed range
+     * [0, 99].
+     *
+     * @return the lexicograph file number, between 0 and 99, inclusive.
+     * @since JWI 2.1.0
+     */
+    int getNumber();
 
-	/**
-	 * Returns the name of the lexicographer file. The string will not be
-	 * <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return the lexicographer file name
-	 * @since JWI 2.1.0
-	 */
-	String getName();
+    /**
+     * Returns the name of the lexicographer file. The string will not be
+     * <code>null</code>, empty, or all whitespace.
+     *
+     * @return the lexicographer file name
+     * @since JWI 2.1.0
+     */
+    String getName();
 
-	/**
-	 * Returns a description of the lexicographer file contents. The string will
-	 * not be <code>null</code>, empty, or all whitespace.
-	 *
-	 * @return a description of the lexicographer file contents
-	 * @since JWI 2.1.0
-	 */
-	String getDescription();
+    /**
+     * Returns a description of the lexicographer file contents. The string will
+     * not be <code>null</code>, empty, or all whitespace.
+     *
+     * @return a description of the lexicographer file contents
+     * @since JWI 2.1.0
+     */
+    String getDescription();
 }

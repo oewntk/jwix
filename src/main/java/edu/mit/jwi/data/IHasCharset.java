@@ -10,9 +10,9 @@
 
 package edu.mit.jwi.data;
 
-import java.nio.charset.Charset;
-
 import edu.mit.jwi.Nullable;
+
+import java.nio.charset.Charset;
 
 /**
  * Classes implementing this interface have an associated Charset.
@@ -23,12 +23,12 @@ import edu.mit.jwi.Nullable;
  */
 public interface IHasCharset
 {
-	/**
-	 * Returns the character set associated with this object.  May be <code>null</code>.
-	 *
-	 * @return the Charset associated this object, possibly <code>null</code>
-	 * @since JWI 2.3.4
-	 */
-	@Nullable
-	Charset getCharset();
+    /**
+     * Returns the character set associated with this object.  May be <code>null</code>.
+     *
+     * @return the Charset associated this object, possibly <code>null</code>
+     * @since JWI 2.3.4
+     */
+    @Nullable
+    Charset getCharset();
 }

@@ -10,18 +10,11 @@
 
 package edu.mit.jwi.item;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import edu.mit.jwi.NonNull;
 import edu.mit.jwi.Nullable;
+
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * Concrete implementation of the <code>IPointer</code> interface. This class
@@ -37,242 +30,242 @@ import edu.mit.jwi.Nullable;
  */
 public class Pointer implements IPointer
 {
-	/**
-	 * This serial version UID identifies the last version of JWI whose
-	 * serialized instances of the Pointer class are compatible with this
-	 * implementation.
-	 *
-	 * @since JWI 2.4.0
-	 */
-	private static final long serialVersionUID = 240;
+    /**
+     * This serial version UID identifies the last version of JWI whose
+     * serialized instances of the Pointer class are compatible with this
+     * implementation.
+     *
+     * @since JWI 2.4.0
+     */
+    private static final long serialVersionUID = 240;
 
-	public static final Pointer ALSO_SEE = new Pointer("^", "Also See");
-	public static final Pointer ANTONYM = new Pointer("!", "Antonym");
-	public static final Pointer ATTRIBUTE = new Pointer("=", "Attribute");
-	public static final Pointer CAUSE = new Pointer(">", "Cause");
-	public static final Pointer DERIVATIONALLY_RELATED = new Pointer("+", "Derivationally related form");
-	public static final Pointer DERIVED_FROM_ADJ = new Pointer("\\", "Derived from adjective");
-	public static final Pointer DOMAIN = new Pointer(";", "Domain of synset (undifferentiated)");
-	public static final Pointer ENTAILMENT = new Pointer("*", "Entailment");
-	public static final Pointer HYPERNYM = new Pointer("@", "Hypernym");
-	public static final Pointer HYPERNYM_INSTANCE = new Pointer("@i", "Instance hypernym");
-	public static final Pointer HYPONYM = new Pointer("~", "Hyponym");
-	public static final Pointer HYPONYM_INSTANCE = new Pointer("~i", "Instance hyponym");
-	public static final Pointer HOLONYM_MEMBER = new Pointer("#m", "Member holonym");
-	public static final Pointer HOLONYM_SUBSTANCE = new Pointer("#s", "Substance holonym");
-	public static final Pointer HOLONYM_PART = new Pointer("#p", "Part holonym");
-	public static final Pointer MEMBER = new Pointer("-", "Member of this domain (undifferentiated)");
-	public static final Pointer MERONYM_MEMBER = new Pointer("%m", "Member meronym");
-	public static final Pointer MERONYM_SUBSTANCE = new Pointer("%s", "Substance meronym");
-	public static final Pointer MERONYM_PART = new Pointer("%p", "Part meronym");
-	public static final Pointer PARTICIPLE = new Pointer("<", "Participle");
-	public static final Pointer PERTAINYM = new Pointer("\\", "Pertainym (pertains to nouns)");
-	public static final Pointer REGION = new Pointer(";r", "Domain of synset - REGION");
-	public static final Pointer REGION_MEMBER = new Pointer("-r", "Member of this domain - REGION");
-	public static final Pointer SIMILAR_TO = new Pointer("&", "Similar To");
-	public static final Pointer TOPIC = new Pointer(";c", "Domain of synset - TOPIC");
-	public static final Pointer TOPIC_MEMBER = new Pointer("-c", "Member of this domain - TOPIC");
-	public static final Pointer USAGE = new Pointer(";u", "Domain of synset - USAGE");
-	public static final Pointer USAGE_MEMBER = new Pointer("-u", "Member of this domain - USAGE");
-	public static final Pointer VERB_GROUP = new Pointer("$", "Verb Group");
-	public static final Pointer IS_CAUSED = new Pointer(">^", "Is caused by");
-	public static final Pointer IS_ENTAILED = new Pointer("*^", "Is entailed by");
+    public static final Pointer ALSO_SEE = new Pointer("^", "Also See");
+    public static final Pointer ANTONYM = new Pointer("!", "Antonym");
+    public static final Pointer ATTRIBUTE = new Pointer("=", "Attribute");
+    public static final Pointer CAUSE = new Pointer(">", "Cause");
+    public static final Pointer DERIVATIONALLY_RELATED = new Pointer("+", "Derivationally related form");
+    public static final Pointer DERIVED_FROM_ADJ = new Pointer("\\", "Derived from adjective");
+    public static final Pointer DOMAIN = new Pointer(";", "Domain of synset (undifferentiated)");
+    public static final Pointer ENTAILMENT = new Pointer("*", "Entailment");
+    public static final Pointer HYPERNYM = new Pointer("@", "Hypernym");
+    public static final Pointer HYPERNYM_INSTANCE = new Pointer("@i", "Instance hypernym");
+    public static final Pointer HYPONYM = new Pointer("~", "Hyponym");
+    public static final Pointer HYPONYM_INSTANCE = new Pointer("~i", "Instance hyponym");
+    public static final Pointer HOLONYM_MEMBER = new Pointer("#m", "Member holonym");
+    public static final Pointer HOLONYM_SUBSTANCE = new Pointer("#s", "Substance holonym");
+    public static final Pointer HOLONYM_PART = new Pointer("#p", "Part holonym");
+    public static final Pointer MEMBER = new Pointer("-", "Member of this domain (undifferentiated)");
+    public static final Pointer MERONYM_MEMBER = new Pointer("%m", "Member meronym");
+    public static final Pointer MERONYM_SUBSTANCE = new Pointer("%s", "Substance meronym");
+    public static final Pointer MERONYM_PART = new Pointer("%p", "Part meronym");
+    public static final Pointer PARTICIPLE = new Pointer("<", "Participle");
+    public static final Pointer PERTAINYM = new Pointer("\\", "Pertainym (pertains to nouns)");
+    public static final Pointer REGION = new Pointer(";r", "Domain of synset - REGION");
+    public static final Pointer REGION_MEMBER = new Pointer("-r", "Member of this domain - REGION");
+    public static final Pointer SIMILAR_TO = new Pointer("&", "Similar To");
+    public static final Pointer TOPIC = new Pointer(";c", "Domain of synset - TOPIC");
+    public static final Pointer TOPIC_MEMBER = new Pointer("-c", "Member of this domain - TOPIC");
+    public static final Pointer USAGE = new Pointer(";u", "Domain of synset - USAGE");
+    public static final Pointer USAGE_MEMBER = new Pointer("-u", "Member of this domain - USAGE");
+    public static final Pointer VERB_GROUP = new Pointer("$", "Verb Group");
+    public static final Pointer IS_CAUSED = new Pointer(">^", "Is caused by");
+    public static final Pointer IS_ENTAILED = new Pointer("*^", "Is entailed by");
 
-	// final instance fields
-	@NonNull
-	private final String symbol;
-	@NonNull
-	private final String name;
-	@NonNull
-	private final String toString;
+    // final instance fields
+    @NonNull
+    private final String symbol;
+    @NonNull
+    private final String name;
+    @NonNull
+    private final String toString;
 
-	/**
-	 * Constructs a new pointer object with the specified symbol and name.
-	 *
-	 * @param symbol the pointer symbol; may not be <code>null</code>, empty, or
-	 *               all whitespace
-	 * @param name   the pointer name; may not be <code>null</code>, empty, or all
-	 *               whitespace
-	 * @since JWI 2.1.0
-	 */
-	public Pointer(String symbol, @NonNull String name)
-	{
-		this.symbol = checkString(symbol);
-		this.name = checkString(name);
-		this.toString = name.toLowerCase().replace(' ', '_').replace(",", "");
-	}
+    /**
+     * Constructs a new pointer object with the specified symbol and name.
+     *
+     * @param symbol the pointer symbol; may not be <code>null</code>, empty, or
+     *               all whitespace
+     * @param name   the pointer name; may not be <code>null</code>, empty, or all
+     *               whitespace
+     * @since JWI 2.1.0
+     */
+    public Pointer(String symbol, @NonNull String name)
+    {
+        this.symbol = checkString(symbol);
+        this.name = checkString(name);
+        this.toString = name.toLowerCase().replace(' ', '_').replace(",", "");
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IPointer#getSymbol()
-	 */
-	@NonNull
-	public String getSymbol()
-	{
-		return symbol;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IPointer#getSymbol()
+     */
+    @NonNull
+    public String getSymbol()
+    {
+        return symbol;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.item.IPointer#getName()
-	 */
-	@NonNull
-	public String getName()
-	{
-		return name;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.item.IPointer#getName()
+     */
+    @NonNull
+    public String getName()
+    {
+        return name;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#toString()
-	 */
-	@NonNull
-	public String toString()
-	{
-		return toString;
-	}
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
+    @NonNull
+    public String toString()
+    {
+        return toString;
+    }
 
-	/**
-	 * This utility method implements the appropriate deserialization for this
-	 * object.
-	 *
-	 * @return the appropriate deserialized object.
-	 * @since JWI 2.4.0
-	 */
-	@Nullable
-	protected Object readResolve()
-	{
-		// check and see if this symbol matches DERIVED_FROM_ADJ (which is
-		// excluded from the pointer map because it is ambiguous)
-		if (DERIVED_FROM_ADJ.getSymbol().equals(symbol) && DERIVED_FROM_ADJ.getName().equals(name))
-		{
-			return DERIVED_FROM_ADJ;
-		}
+    /**
+     * This utility method implements the appropriate deserialization for this
+     * object.
+     *
+     * @return the appropriate deserialized object.
+     * @since JWI 2.4.0
+     */
+    @Nullable
+    protected Object readResolve()
+    {
+        // check and see if this symbol matches DERIVED_FROM_ADJ (which is
+        // excluded from the pointer map because it is ambiguous)
+        if (DERIVED_FROM_ADJ.getSymbol().equals(symbol) && DERIVED_FROM_ADJ.getName().equals(name))
+        {
+            return DERIVED_FROM_ADJ;
+        }
 
-		// otherwise, try to find a match symbol
-		Pointer pointer = pointerMap.get(symbol);
-		if (pointer != null && pointer.getSymbol().equals(symbol) && pointer.getName().equals(name))
-		{
-			return pointer;
-		}
+        // otherwise, try to find a match symbol
+        Pointer pointer = pointerMap.get(symbol);
+        if (pointer != null && pointer.getSymbol().equals(symbol) && pointer.getName().equals(name))
+        {
+            return pointer;
+        }
 
-		// nothing matches, just return the deserialized object
-		return this;
-	}
+        // nothing matches, just return the deserialized object
+        return this;
+    }
 
-	/**
-	 * Throws an exception if the specified string is <code>null</code>, empty,
-	 * or all whitespace. Returns a trimmed form of the string.
-	 *
-	 * @param str the string to be checked
-	 * @return a trimmed form of the string
-	 * @throws NullPointerException     if the specified string is <code>null</code>
-	 * @throws IllegalArgumentException if the specified string is empty or all whitespace
-	 * @since JWI 2.2.0
-	 */
-	protected static String checkString(String str)
-	{
-		str = str.trim();
-		if (str.length() == 0)
-		{
-			throw new IllegalArgumentException();
-		}
-		return str;
-	}
+    /**
+     * Throws an exception if the specified string is <code>null</code>, empty,
+     * or all whitespace. Returns a trimmed form of the string.
+     *
+     * @param str the string to be checked
+     * @return a trimmed form of the string
+     * @throws NullPointerException     if the specified string is <code>null</code>
+     * @throws IllegalArgumentException if the specified string is empty or all whitespace
+     * @since JWI 2.2.0
+     */
+    protected static String checkString(String str)
+    {
+        str = str.trim();
+        if (str.length() == 0)
+        {
+            throw new IllegalArgumentException();
+        }
+        return str;
+    }
 
-	@NonNull
-	private static final Map<String, Pointer> pointerMap;
-	@NonNull
-	private static final Set<Pointer> pointerSet;
+    @NonNull
+    private static final Map<String, Pointer> pointerMap;
+    @NonNull
+    private static final Set<Pointer> pointerSet;
 
-	// class initialization code
-	static
-	{
-		// get the instance fields
-		Field[] fields = Pointer.class.getFields();
-		List<Field> instanceFields = new ArrayList<>();
-		for (Field field : fields)
-		{
-			if (field.getGenericType() == Pointer.class)
-			{
-				instanceFields.add(field);
-			}
-		}
+    // class initialization code
+    static
+    {
+        // get the instance fields
+        Field[] fields = Pointer.class.getFields();
+        List<Field> instanceFields = new ArrayList<>();
+        for (Field field : fields)
+        {
+            if (field.getGenericType() == Pointer.class)
+            {
+                instanceFields.add(field);
+            }
+        }
 
-		// these are our backing collections
-		Set<Pointer> hiddenSet = new LinkedHashSet<>(instanceFields.size());
-		Map<String, Pointer> hiddenMap = new LinkedHashMap<>(instanceFields.size() - 1);
+        // these are our backing collections
+        Set<Pointer> hiddenSet = new LinkedHashSet<>(instanceFields.size());
+        Map<String, Pointer> hiddenMap = new LinkedHashMap<>(instanceFields.size() - 1);
 
-		Pointer ptr;
-		for (Field field : instanceFields)
-		{
-			try
-			{
-				ptr = (Pointer) field.get(null);
-				if (ptr == null)
-				{
-					continue;
-				}
-				hiddenSet.add(ptr);
-				if (ptr != DERIVED_FROM_ADJ)
-				{
-					hiddenMap.put(ptr.getSymbol(), ptr);
-				}
-			}
-			catch (IllegalAccessException e)
-			{
-				// Ignore
-			}
-		}
+        Pointer ptr;
+        for (Field field : instanceFields)
+        {
+            try
+            {
+                ptr = (Pointer) field.get(null);
+                if (ptr == null)
+                {
+                    continue;
+                }
+                hiddenSet.add(ptr);
+                if (ptr != DERIVED_FROM_ADJ)
+                {
+                    hiddenMap.put(ptr.getSymbol(), ptr);
+                }
+            }
+            catch (IllegalAccessException e)
+            {
+                // Ignore
+            }
+        }
 
-		// make the collections unmodifiable
-		pointerSet = Collections.unmodifiableSet(hiddenSet);
-		pointerMap = Collections.unmodifiableMap(hiddenMap);
-	}
+        // make the collections unmodifiable
+        pointerSet = Collections.unmodifiableSet(hiddenSet);
+        pointerMap = Collections.unmodifiableMap(hiddenMap);
+    }
 
-	/**
-	 * Emulates the {@code Enum#values()} function. Returns an unmodifiable collection
-	 * of all the pointers declared in this class, in the order they are
-	 * declared.
-	 *
-	 * @return returns an unmodifiable collection of the pointers declared in
-	 * this class
-	 * @since JWI 2.1.0
-	 */
-	@NonNull
-	public static Collection<Pointer> values()
-	{
-		return pointerSet;
-	}
+    /**
+     * Emulates the {@code Enum#values()} function. Returns an unmodifiable collection
+     * of all the pointers declared in this class, in the order they are
+     * declared.
+     *
+     * @return returns an unmodifiable collection of the pointers declared in
+     * this class
+     * @since JWI 2.1.0
+     */
+    @NonNull
+    public static Collection<Pointer> values()
+    {
+        return pointerSet;
+    }
 
-	private static final String ambiguousSymbol = "\\";
+    private static final String ambiguousSymbol = "\\";
 
-	/**
-	 * Returns the pointer type (static final instance) that matches the
-	 * specified pointer symbol.
-	 *
-	 * @param symbol the symbol to look up
-	 * @param pos    the part of speech for the symbol; may be <code>null</code>
-	 *               except for ambiguous symbols
-	 * @return pointer
-	 * @throws IllegalArgumentException if the symbol does not correspond to a known pointer.
-	 * @since JWI 2.1.0
-	 */
-	@Nullable
-	public static Pointer getPointerType(@NonNull String symbol, POS pos)
-	{
-		if (pos == POS.ADVERB && symbol.equals(ambiguousSymbol))
-		{
-			return DERIVED_FROM_ADJ;
-		}
-		Pointer pointerType = pointerMap.get(symbol);
-		if (pointerType == null)
-		{
-			throw new IllegalArgumentException("No pointer type corresponding to symbol '" + symbol + "'");
-		}
-		return pointerType;
-	}
+    /**
+     * Returns the pointer type (static final instance) that matches the
+     * specified pointer symbol.
+     *
+     * @param symbol the symbol to look up
+     * @param pos    the part of speech for the symbol; may be <code>null</code>
+     *               except for ambiguous symbols
+     * @return pointer
+     * @throws IllegalArgumentException if the symbol does not correspond to a known pointer.
+     * @since JWI 2.1.0
+     */
+    @Nullable
+    public static Pointer getPointerType(@NonNull String symbol, POS pos)
+    {
+        if (pos == POS.ADVERB && symbol.equals(ambiguousSymbol))
+        {
+            return DERIVED_FROM_ADJ;
+        }
+        Pointer pointerType = pointerMap.get(symbol);
+        if (pointerType == null)
+        {
+            throw new IllegalArgumentException("No pointer type corresponding to symbol '" + symbol + "'");
+        }
+        return pointerType;
+    }
 }

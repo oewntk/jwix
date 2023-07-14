@@ -10,9 +10,9 @@
 
 package edu.mit.jwi.item;
 
-import java.io.Serializable;
-
 import edu.mit.jwi.Nullable;
+
+import java.io.Serializable;
 
 /**
  * A Wordnet sense entry object, represented in the Wordnet files as a line in the
@@ -24,40 +24,40 @@ import edu.mit.jwi.Nullable;
  */
 public interface ISenseEntry extends IHasPOS, Serializable
 {
-	/**
-	 * Returns the sense key for this sense entry.  Will not return <code>null</code>.
-	 *
-	 * @return The non-<code>null</code> sense key for this sense entry.
-	 * @since JWI 2.1.0
-	 */
-	@Nullable
-	ISenseKey getSenseKey();
+    /**
+     * Returns the sense key for this sense entry.  Will not return <code>null</code>.
+     *
+     * @return The non-<code>null</code> sense key for this sense entry.
+     * @since JWI 2.1.0
+     */
+    @Nullable
+    ISenseKey getSenseKey();
 
-	/**
-	 * Returns the synset offset for this sense entry, a non-negative integer.
-	 *
-	 * @return the non-negative synset offset for this entry
-	 * @since JWI 2.1.0
-	 */
-	int getOffset();
+    /**
+     * Returns the synset offset for this sense entry, a non-negative integer.
+     *
+     * @return the non-negative synset offset for this entry
+     * @since JWI 2.1.0
+     */
+    int getOffset();
 
-	/**
-	 * Returns the sense number for the word indicated by this entry. A sense
-	 * number is a positive integer.
-	 *
-	 * @return the non-negative sense number for the word indicated by this entry.
-	 * @since JWI 2.1.0
-	 */
-	int getSenseNumber();
+    /**
+     * Returns the sense number for the word indicated by this entry. A sense
+     * number is a positive integer.
+     *
+     * @return the non-negative sense number for the word indicated by this entry.
+     * @since JWI 2.1.0
+     */
+    int getSenseNumber();
 
-	/**
-	 * Returns the tag count for the sense entry. A tag count is a non-negative
-	 * integer that represents the number of times the sense is tagged in
-	 * various semantic concordance texts. A count of 0 indicates that the sense
-	 * has not been semantically tagged.
-	 *
-	 * @return the non-negative tag count for this entry
-	 * @since JWI 2.1.0
-	 */
-	int getTagCount();
+    /**
+     * Returns the tag count for the sense entry. A tag count is a non-negative
+     * integer that represents the number of times the sense is tagged in
+     * various semantic concordance texts. A count of 0 indicates that the sense
+     * has not been semantically tagged.
+     *
+     * @return the non-negative tag count for this entry
+     * @since JWI 2.1.0
+     */
+    int getTagCount();
 }

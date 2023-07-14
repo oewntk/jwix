@@ -10,16 +10,12 @@
 
 package edu.mit.jwi.morph;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import edu.mit.jwi.Nullable;
 import edu.mit.jwi.IDictionary;
+import edu.mit.jwi.Nullable;
 import edu.mit.jwi.item.IExceptionEntry;
 import edu.mit.jwi.item.POS;
+
+import java.util.*;
 
 /**
  * This stemmer adds functionality to the simple pattern-based stemmer
@@ -34,98 +30,98 @@ import edu.mit.jwi.item.POS;
  */
 public class WordnetStemmer extends SimpleStemmer
 {
-	@Nullable
-	private final IDictionary dict;
+    @Nullable
+    private final IDictionary dict;
 
-	/**
-	 * Constructs a WordnetStemmer that, naturally, requires a Wordnet
-	 * dictionary.
-	 *
-	 * @param dict the dictionary to use; may not be <code>null</code>
-	 * @throws NullPointerException if the specified dictionary is <code>null</code>
-	 * @since JWI 1.0
-	 */
-	public WordnetStemmer(@Nullable IDictionary dict)
-	{
-		if (dict == null)
-		{
-			throw new NullPointerException();
-		}
-		this.dict = dict;
-	}
+    /**
+     * Constructs a WordnetStemmer that, naturally, requires a Wordnet
+     * dictionary.
+     *
+     * @param dict the dictionary to use; may not be <code>null</code>
+     * @throws NullPointerException if the specified dictionary is <code>null</code>
+     * @since JWI 1.0
+     */
+    public WordnetStemmer(@Nullable IDictionary dict)
+    {
+        if (dict == null)
+        {
+            throw new NullPointerException();
+        }
+        this.dict = dict;
+    }
 
-	/**
-	 * Returns the dictionary in use by the stemmer; will not return <code>null</code>
-	 *
-	 * @return the dictionary in use by this stemmer
-	 * @since JWI 2.2.0
-	 */
-	@Nullable
-	public IDictionary getDictionary()
-	{
-		return dict;
-	}
+    /**
+     * Returns the dictionary in use by the stemmer; will not return <code>null</code>
+     *
+     * @return the dictionary in use by this stemmer
+     * @since JWI 2.2.0
+     */
+    @Nullable
+    public IDictionary getDictionary()
+    {
+        return dict;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see edu.edu.mit.jwi.morph.SimpleStemmer#findStems(java.lang.String, edu.edu.mit.jwi.item.POS)
-	 */
-	public List<String> findStems(String word, @Nullable POS pos)
-	{
-		word = normalize(word);
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.edu.mit.jwi.morph.SimpleStemmer#findStems(java.lang.String, edu.edu.mit.jwi.item.POS)
+     */
+    public List<String> findStems(String word, @Nullable POS pos)
+    {
+        word = normalize(word);
 
-		if (pos == null)
-		{
-			return super.findStems(word, null);
-		}
+        if (pos == null)
+        {
+            return super.findStems(word, null);
+        }
 
-		Set<String> result = new LinkedHashSet<>();
+        Set<String> result = new LinkedHashSet<>();
 
-		// first look for the word in the exception lists
-		IExceptionEntry excEntry = dict.getExceptionEntry(word, pos);
-		if (excEntry != null)
-		{
-			result.addAll(excEntry.getRootForms());
-		}
+        // first look for the word in the exception lists
+        IExceptionEntry excEntry = dict.getExceptionEntry(word, pos);
+        if (excEntry != null)
+        {
+            result.addAll(excEntry.getRootForms());
+        }
 
-		// then look and see if it's in Wordnet; if so, the form itself is a stem
-		if (dict.getIndexWord(word, pos) != null)
-		{
-			result.add(word);
-		}
+        // then look and see if it's in Wordnet; if so, the form itself is a stem
+        if (dict.getIndexWord(word, pos) != null)
+        {
+            result.add(word);
+        }
 
-		if (excEntry != null)
-		{
-			return new ArrayList<>(result);
-		}
+        if (excEntry != null)
+        {
+            return new ArrayList<>(result);
+        }
 
-		// go to the simple stemmer and check and see if any of those stems are in WordNet
-		List<String> possibles = super.findStems(word, pos);
+        // go to the simple stemmer and check and see if any of those stems are in WordNet
+        List<String> possibles = super.findStems(word, pos);
 
-		// Fix for Bug015: don't allow empty strings to go to the dictionary
-		possibles.removeIf(s -> s.trim().length() == 0);
+        // Fix for Bug015: don't allow empty strings to go to the dictionary
+        possibles.removeIf(s -> s.trim().length() == 0);
 
-		// check each algorithmically obtained root to see if it's in WordNet
-		for (String possible : possibles)
-		{
-			if (dict.getIndexWord(possible, pos) != null)
-			{
-				result.add(possible);
-			}
-		}
+        // check each algorithmically obtained root to see if it's in WordNet
+        for (String possible : possibles)
+        {
+            if (dict.getIndexWord(possible, pos) != null)
+            {
+                result.add(possible);
+            }
+        }
 
-		if (result.isEmpty())
-		{
-			if (possibles.isEmpty())
-			{
-				return Collections.emptyList();
-			}
-			else
-			{
-				return new ArrayList<>(possibles);
-			}
-		}
-		return new ArrayList<>(result);
-	}
+        if (result.isEmpty())
+        {
+            if (possibles.isEmpty())
+            {
+                return Collections.emptyList();
+            }
+            else
+            {
+                return new ArrayList<>(possibles);
+            }
+        }
+        return new ArrayList<>(result);
+    }
 }

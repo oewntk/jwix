@@ -10,9 +10,9 @@
 
 package edu.mit.jwi.data.compare;
 
-import java.util.Comparator;
-
 import edu.mit.jwi.Nullable;
+
+import java.util.Comparator;
 
 /**
  * A string comparator that may have an associated comment detector. The
@@ -26,14 +26,14 @@ import edu.mit.jwi.Nullable;
  */
 public interface ILineComparator extends Comparator<String>
 {
-	/**
-	 * Returns the comment detector instance associated with this line
-	 * comparator, or <code>null</code> if one does not exist.
-	 *
-	 * @return the comment detector associated with this line comparator, or
-	 * <code>null</code> if there is none
-	 * @since JWI 2.0.0
-	 */
-	@Nullable
-	ICommentDetector getCommentDetector();
+    /**
+     * Returns the comment detector instance associated with this line
+     * comparator, or <code>null</code> if one does not exist.
+     *
+     * @return the comment detector associated with this line comparator, or
+     * <code>null</code> if there is none
+     * @since JWI 2.0.0
+     */
+    @Nullable
+    ICommentDetector getCommentDetector();
 }

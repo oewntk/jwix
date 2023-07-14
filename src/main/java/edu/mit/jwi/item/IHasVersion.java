@@ -21,14 +21,14 @@ import edu.mit.jwi.Nullable;
  */
 public interface IHasVersion
 {
-	/**
-	 * Returns the associated version for this object. If this object is not
-	 * associated with any particular version, this method may return
-	 * <code>null</code>.
-	 *
-	 * @return The associated version, or <code>null</code> if none.
-	 * @since JWI 2.1.0
-	 */
-	@Nullable
-	IVersion getVersion();
+    /**
+     * Returns the associated version for this object. If this object is not
+     * associated with any particular version, this method may return
+     * <code>null</code>.
+     *
+     * @return The associated version, or <code>null</code> if none.
+     * @since JWI 2.1.0
+     */
+    @Nullable
+    IVersion getVersion();
 }

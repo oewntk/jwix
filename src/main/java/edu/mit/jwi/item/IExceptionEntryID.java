@@ -22,16 +22,16 @@ import edu.mit.jwi.NonNull;
  */
 public interface IExceptionEntryID extends IHasPOS, IItemID<IExceptionEntry>
 {
-	/**
-	 * Returns the surface form (i.e., not the root form) of the word for which
-	 * a morphological exception entry is desired. Because all surface forms in
-	 * the exception files are lower case, the string returned by this call is
-	 * also lower case.
-	 *
-	 * @return the lowercase surface form of the exception entry indicated by
-	 * this id object
-	 * @since JWI 1.0
-	 */
-	@NonNull
-	String getSurfaceForm();
+    /**
+     * Returns the surface form (i.e., not the root form) of the word for which
+     * a morphological exception entry is desired. Because all surface forms in
+     * the exception files are lower case, the string returned by this call is
+     * also lower case.
+     *
+     * @return the lowercase surface form of the exception entry indicated by
+     * this id object
+     * @since JWI 1.0
+     */
+    @NonNull
+    String getSurfaceForm();
 }

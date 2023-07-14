@@ -10,10 +10,10 @@
 
 package edu.mit.jwi.item;
 
+import edu.mit.jwi.Nullable;
+
 import java.io.Serializable;
 import java.util.List;
-
-import edu.mit.jwi.Nullable;
 
 /**
  * The data that can be obtained from a line in an exception entry file. Because
@@ -27,23 +27,23 @@ import edu.mit.jwi.Nullable;
  */
 public interface IExceptionEntryProxy extends Serializable
 {
-	/**
-	 * Returns the surface form (i.e., not the root form) of the word for this
-	 * exception entry. Because all surface forms in the exception files are
-	 * lower case, the string returned by this call is also lower case.
-	 *
-	 * @return the lowercase surface form of the exception entry
-	 * @since JWI 1.0
-	 */
-	@Nullable
-	String getSurfaceForm();
+    /**
+     * Returns the surface form (i.e., not the root form) of the word for this
+     * exception entry. Because all surface forms in the exception files are
+     * lower case, the string returned by this call is also lower case.
+     *
+     * @return the lowercase surface form of the exception entry
+     * @since JWI 1.0
+     */
+    @Nullable
+    String getSurfaceForm();
 
-	/**
-	 * Returns an unmodifiable list of acceptable root forms for the surface
-	 * form.
-	 *
-	 * @return A non-null, non-empty, unmodifiable list of root forms
-	 * @since JWI 2.0.0
-	 */
-	List<String> getRootForms();
+    /**
+     * Returns an unmodifiable list of acceptable root forms for the surface
+     * form.
+     *
+     * @return A non-null, non-empty, unmodifiable list of root forms
+     * @since JWI 2.0.0
+     */
+    List<String> getRootForms();
 }

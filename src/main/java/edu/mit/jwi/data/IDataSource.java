@@ -10,12 +10,12 @@
 
 package edu.mit.jwi.data;
 
-import java.util.Iterator;
-
+import edu.mit.jwi.IDataSourceDictionary;
 import edu.mit.jwi.NonNull;
 import edu.mit.jwi.Nullable;
-import edu.mit.jwi.IDataSourceDictionary;
 import edu.mit.jwi.item.IHasVersion;
+
+import java.util.Iterator;
 
 /**
  * <p>
@@ -41,55 +41,55 @@ import edu.mit.jwi.item.IHasVersion;
  */
 public interface IDataSource<T> extends IHasVersion, Iterable<String>, IHasLifecycle
 {
-	/**
-	 * Returns a string representation of the name of this resource. For
-	 * file-based resources, this will usually be the filename.
-	 *
-	 * @return the name of this resource, neither <code>null</code>, empty, or
-	 * all whitespace
-	 * @since JWI 2.0.0
-	 */
-	@NonNull
-	String getName();
+    /**
+     * Returns a string representation of the name of this resource. For
+     * file-based resources, this will usually be the filename.
+     *
+     * @return the name of this resource, neither <code>null</code>, empty, or
+     * all whitespace
+     * @since JWI 2.0.0
+     */
+    @NonNull
+    String getName();
 
-	/**
-	 * Returns the assigned content type of the resource that backs this object.
-	 *
-	 * @return the assigned content type for this data source. Will not return
-	 * <code>null</code>.
-	 * @since JWI 2.0.0
-	 */
-	@Nullable
-	IContentType<T> getContentType();
+    /**
+     * Returns the assigned content type of the resource that backs this object.
+     *
+     * @return the assigned content type for this data source. Will not return
+     * <code>null</code>.
+     * @since JWI 2.0.0
+     */
+    @Nullable
+    IContentType<T> getContentType();
 
-	/**
-	 * Returns the line in the resource contains the data indexed by the
-	 * specified key. If the file cannot find the key in its data resource, it
-	 * returns <code>null</code>
-	 *
-	 * @param key the key which indexes the desired data
-	 * @return the line indexed by the specified key in the resource
-	 * @throws NullPointerException if the specified key is <code>null</code>
-	 * @since JWI 2.0.0
-	 */
-	@Nullable
-	String getLine(String key);
+    /**
+     * Returns the line in the resource contains the data indexed by the
+     * specified key. If the file cannot find the key in its data resource, it
+     * returns <code>null</code>
+     *
+     * @param key the key which indexes the desired data
+     * @return the line indexed by the specified key in the resource
+     * @throws NullPointerException if the specified key is <code>null</code>
+     * @since JWI 2.0.0
+     */
+    @Nullable
+    String getLine(String key);
 
-	/**
-	 * Returns an iterator that will iterator over lines in the data resource,
-	 * starting at the line specified by the given key. If the key is
-	 * <code>null</code>, this is the same as calling the plain
-	 * {@link #iterator()} method. If no line starts with the pattern, the
-	 * iterator's {@link Iterator#hasNext()} will return <code>false</code>. The
-	 * iterator does not support the {@link Iterator#remove()} operation; if
-	 * that method is called, the iterator will throw an
-	 * {@link UnsupportedOperationException}.
-	 *
-	 * @param key the key at which the iterator should begin
-	 * @return an iterator that will iterate over the file starting at the line
-	 * indexed by the specified key
-	 * @since JWI 2.0.0
-	 */
-	@NonNull
-	Iterator<String> iterator(String key);
+    /**
+     * Returns an iterator that will iterator over lines in the data resource,
+     * starting at the line specified by the given key. If the key is
+     * <code>null</code>, this is the same as calling the plain
+     * {@link #iterator()} method. If no line starts with the pattern, the
+     * iterator's {@link Iterator#hasNext()} will return <code>false</code>. The
+     * iterator does not support the {@link Iterator#remove()} operation; if
+     * that method is called, the iterator will throw an
+     * {@link UnsupportedOperationException}.
+     *
+     * @param key the key at which the iterator should begin
+     * @return an iterator that will iterate over the file starting at the line
+     * indexed by the specified key
+     * @since JWI 2.0.0
+     */
+    @NonNull
+    Iterator<String> iterator(String key);
 }
