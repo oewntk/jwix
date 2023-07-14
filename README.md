@@ -1,6 +1,8 @@
+<!--suppress HtmlDeprecatedAttribute -->
 <p align="center">
 <img width="256" alt="oewntk" height="256" src="images/oewntk.png">
 </p>
+<!--suppress HtmlDeprecatedAttribute -->
 <p align="center">
 <img width="150" alt="mavencentral" src="images/mavencentral.png">
 </p>
