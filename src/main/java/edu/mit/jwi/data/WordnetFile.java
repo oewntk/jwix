@@ -609,15 +609,24 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 		 *
 		 * @param buffer the buffer over which the iterator should iterator; may
 		 *               not be <code>null</code>
-		 * @param key    the key of the line to start at; may be <code>null</code>
 		 * @throws NullPointerException if the specified buffer is <code>null</code>
 		 * @since JWI 1.0
 		 */
-		public LineIterator(@NonNull ByteBuffer buffer, String key)
+		public LineIterator(@NonNull ByteBuffer buffer)
 		{
 			parentBuffer = buffer;
 			itrBuffer = buffer.asReadOnlyBuffer();
 			itrBuffer.clear();
+		}
+
+		/**
+		 * Start at the specified key.
+		 *
+		 * @param key    the key of the line to start at; may be <code>null</code>
+		 * @return line iterator
+		 */
+		public LineIterator init(String key)
+		{
 			key = (key == null) ? null : key.trim();
 			if (key == null || key.length() == 0)
 			{
@@ -627,6 +636,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
 			{
 				findFirstLine(key);
 			}
+			return this;
 		}
 
 		/**
