@@ -216,7 +216,7 @@ public class WordID implements IWordID
     {
         assert id != null;
         return 31 * id.hashCode();
-     }
+    }
 
     /*
      * (non-Javadoc)
