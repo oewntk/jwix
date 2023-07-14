@@ -50,6 +50,11 @@ public class ContentType<T> implements IContentType<T>
 	public static final ContentType<IIndexWord> INDEX_ADVERB = new ContentType<>(ContentTypeKey.INDEX_ADVERB, IndexLineComparator.getInstance());
 	public static final ContentType<IIndexWord> INDEX_ADJECTIVE = new ContentType<>(ContentTypeKey.INDEX_ADJECTIVE, IndexLineComparator.getInstance());
 
+	public static final ContentType<IIndexWord> WORD_NOUN = new ContentType<>(ContentTypeKey.WORD_NOUN, IndexLineComparator.getInstance());
+	public static final ContentType<IIndexWord> WORD_VERB = new ContentType<>(ContentTypeKey.WORD_VERB, IndexLineComparator.getInstance());
+	public static final ContentType<IIndexWord> WORD_ADVERB = new ContentType<>(ContentTypeKey.WORD_ADVERB, IndexLineComparator.getInstance());
+	public static final ContentType<IIndexWord> WORD_ADJECTIVE = new ContentType<>(ContentTypeKey.WORD_ADJECTIVE, IndexLineComparator.getInstance());
+
 	public static final ContentType<ISynset> DATA_NOUN = new ContentType<>(ContentTypeKey.DATA_NOUN, DataLineComparator.getInstance());
 	public static final ContentType<ISynset> DATA_VERB = new ContentType<>(ContentTypeKey.DATA_VERB, DataLineComparator.getInstance());
 	public static final ContentType<ISynset> DATA_ADVERB = new ContentType<>(ContentTypeKey.DATA_ADVERB, DataLineComparator.getInstance());
@@ -270,6 +275,26 @@ public class ContentType<T> implements IContentType<T>
 				return INDEX_ADVERB;
 			case ADJECTIVE:
 				return INDEX_ADJECTIVE;
+		}
+		throw new IllegalStateException("This should not happen.");
+	}
+
+	public static IContentType<IIndexWord> getWordContentType(@Nullable POS pos)
+	{
+		if (pos == null)
+		{
+			throw new NullPointerException();
+		}
+		switch (pos)
+		{
+			case NOUN:
+				return WORD_NOUN;
+			case VERB:
+				return WORD_VERB;
+			case ADVERB:
+				return WORD_ADVERB;
+			case ADJECTIVE:
+				return WORD_ADJECTIVE;
 		}
 		throw new IllegalStateException("This should not happen.");
 	}
