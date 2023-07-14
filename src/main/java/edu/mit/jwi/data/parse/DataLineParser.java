@@ -203,7 +203,7 @@ public class DataLineParser implements ILineParser<ISynset>
             }
 
             // parse verb frames
-            // do not make the field compulsory for verbs with a '00' when no frame is present
+            // do not make the field compulsory for verbs with a 00 when no frame is present
             if (synset_pos == POS.VERB)
             {
                 String peekTok = tokenizer.nextToken();
