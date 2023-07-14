@@ -9,7 +9,8 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-public class JWIWordStart {
+public class JWIWordStartTests
+{
     private static final boolean VERBOSE = !System.getProperties().containsKey("SILENT");
 
     private static final PrintStream PS = VERBOSE ? System.out : new PrintStream(new OutputStream() {
@@ -19,6 +20,9 @@ public class JWIWordStart {
     });
 
     private static JWI jwi;
+    String start = System.getProperty("TARGET");
+    String scope = System.getProperty("TARGETSCOPE");
+    POS pos = POS.valueOf(scope);
 
     @BeforeAll
     public static void init() throws IOException {
@@ -30,8 +34,8 @@ public class JWIWordStart {
 
     @Test
     public void searchStart() {
-        String start = System.getProperty("WORD");
-        List<String> result = jwi.getDict().getWords(start, POS.VERB);
-        System.out.println(result);
+        List<String> result = jwi.getDict().getWords(start, pos);
+        PS.println(start);
+        PS.println(result);
     }
 }

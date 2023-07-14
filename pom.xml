@@ -88,6 +88,14 @@
 							<value>love</value>
 						</property>
 						<property>
+							<name>TARGET</name>
+							<value>arb</value>
+						</property>
+						<property>
+							<name>TARGETSCOPE</name>
+							<value>VERB</value>
+						</property>
+						<property>
 							<name>SILENT</name>
 						</property>
 					</systemProperties>
