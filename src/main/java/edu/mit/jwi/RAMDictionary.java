@@ -1902,4 +1902,11 @@ public class RAMDictionary implements IRAMDictionary
 		System.out.println("(done)");
 		return true;
 	}
+
+	@NonNull
+	public List<String> getWords(@NonNull String start, @NonNull POS pos)
+	{
+		assert backing != null;
+		return backing.getWords(start, pos);
+	}
 }
