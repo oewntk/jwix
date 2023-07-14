@@ -112,7 +112,8 @@ public class DirectAccessWordnetFile<T> extends WordnetFile<T>
 		 */
 		public DirectLineIterator(@NonNull ByteBuffer buffer, String key)
 		{
-			super(buffer, key);
+			super(buffer);
+			init(key);
 		}
 
 		private final Object bufferLock = new Object();
