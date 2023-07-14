@@ -480,6 +480,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
      * @throws NullPointerException if the specified buffer is <code>null</code>
      * @since JWI 2.3.4
      */
+    @SuppressWarnings("DataFlowIssue")
     @Nullable
     public static String getLine(@NonNull ByteBuffer buf, @Nullable Charset cs)
     {
@@ -531,9 +532,7 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
         // pb with covariant returns if compiled with JSK >=9
         // unless release option is used
         ByteBuffer buf2 = buf.duplicate();
-        //noinspection ConstantConditions
         buf2 = (ByteBuffer) buf2.position(start);
-        //noinspection ConstantConditions
         buf2 = (ByteBuffer) buf2.limit(end);
         buf = buf2;
 
@@ -623,9 +622,8 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
          * Start at the specified key.
          *
          * @param key the key of the line to start at; may be <code>null</code>
-         * @return line iterator
          */
-        public LineIterator init(String key)
+        public void init(String key)
         {
             key = (key == null) ? null : key.trim();
             if (key == null || key.length() == 0)
@@ -636,7 +634,6 @@ public abstract class WordnetFile<T> implements ILoadableDataSource<T>
             {
                 findFirstLine(key);
             }
-            return this;
         }
 
         /**
