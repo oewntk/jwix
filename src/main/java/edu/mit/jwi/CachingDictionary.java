@@ -14,29 +14,14 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import edu.mit.jwi.data.ContentTypeKey;
 import edu.mit.jwi.data.compare.ILineComparator;
-import edu.mit.jwi.item.ExceptionEntryID;
-import edu.mit.jwi.item.IExceptionEntry;
-import edu.mit.jwi.item.IExceptionEntryID;
-import edu.mit.jwi.item.IIndexWord;
-import edu.mit.jwi.item.IIndexWordID;
-import edu.mit.jwi.item.IItem;
-import edu.mit.jwi.item.IItemID;
-import edu.mit.jwi.item.ISenseEntry;
-import edu.mit.jwi.item.ISenseKey;
-import edu.mit.jwi.item.ISynset;
-import edu.mit.jwi.item.ISynsetID;
-import edu.mit.jwi.item.IVersion;
-import edu.mit.jwi.item.IWord;
-import edu.mit.jwi.item.IWordID;
-import edu.mit.jwi.item.IndexWordID;
-import edu.mit.jwi.item.POS;
-import edu.mit.jwi.item.Synset;
+import edu.mit.jwi.item.*;
 
 /**
  * A dictionary that caches the results of another dictionary
@@ -893,5 +878,13 @@ public class CachingDictionary implements ICachingDictionary
 			assert senseCache != null;
 			return senseCache.get(key);
 		}
+	}
+
+	@NonNull
+	public List<String> getWords(@NonNull String start, @NonNull POS pos)
+	{
+		checkOpen();
+		assert backing != null;
+		return backing.getWords(start, pos);
 	}
 }
