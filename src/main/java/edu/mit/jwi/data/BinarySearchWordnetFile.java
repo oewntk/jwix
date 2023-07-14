@@ -131,6 +131,8 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 	 */
 	public class BinarySearchLineIterator extends LineIterator
 	{
+		private final Object bufferLock;
+
 		/**
 		 * Constructs a new line iterator over this buffer, starting at the
 		 * specified key.
@@ -143,10 +145,10 @@ public class BinarySearchWordnetFile<T> extends WordnetFile<T>
 		 */
 		public BinarySearchLineIterator(@NonNull ByteBuffer buffer, String key)
 		{
-			super(buffer, key);
+			super(buffer);
+		 	bufferLock = new Object();
+			init(key);
 		}
-
-		private final Object bufferLock = new Object();
 
 		/*
 		 * (non-Javadoc)
