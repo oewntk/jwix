@@ -103,6 +103,7 @@ public interface IRAMDictionary extends IDictionary, ILoadPolicy, ILoadable
         @NonNull
         public InputStream makeInputStream() throws IOException
         {
+            //noinspection IOStreamConstructor
             return new FileInputStream(file);
         }
     }
