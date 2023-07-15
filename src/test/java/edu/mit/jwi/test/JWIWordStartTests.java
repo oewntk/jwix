@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.List;
+import java.util.Set;
 
 public class JWIWordStartTests
 {
@@ -22,15 +22,26 @@ public class JWIWordStartTests
     });
 
     private static JWI jwi;
-    final String start = System.getProperty("TARGET");
-    final String scope = System.getProperty("TARGETSCOPE");
-    final POS pos = POS.valueOf(scope);
+    private static String start;
+    private static POS pos;
 
     @BeforeAll
     public static void init() throws IOException
     {
         String wnHome = System.getProperty("SOURCE");
         jwi = new JWI(wnHome);
+
+        start = System.getProperty("TARGET");
+
+        String scope = System.getProperty("TARGETSCOPE");
+        try
+        {
+            pos = POS.valueOf(scope);
+        }
+        catch (IllegalArgumentException e)
+        {
+            pos = null;
+        }
     }
 
     // enum
@@ -38,7 +49,7 @@ public class JWIWordStartTests
     @Test
     public void searchStart()
     {
-        List<String> result = jwi.getDict().getWords(start, pos);
+        Set<String> result = jwi.getDict().getWords(start, pos);
         PS.println(start);
         PS.println(result);
     }
