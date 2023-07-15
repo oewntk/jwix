@@ -17,10 +17,7 @@ import edu.mit.jwi.item.*;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Basic implementation of the {@code IDictionary} interface. A path to the
@@ -208,8 +205,26 @@ public class DataSourceDictionary implements IDataSourceDictionary
     }
 
     @NonNull
-    @Override
-    public List<String> getWords(@NonNull String start, @NonNull POS pos)
+    public Set<String> getWords(@NonNull String start, @Nullable POS pos)
+    {
+        checkOpen();
+        Set<String> result = new TreeSet<>();
+        if (pos != null)
+        {
+            getWords(start, pos, result);
+        }
+        else
+        {
+            for (POS pos2 : POS.values())
+            {
+                getWords(start, pos2, result);
+            }
+        }
+        return result;
+    }
+
+    @NonNull
+    protected Collection<String> getWords(@NonNull String start, @NonNull POS pos, @NonNull Set<String> result)
     {
         checkOpen();
         IContentType<IIndexWord> content = provider.resolveContentType(DataType.WORD, pos);
@@ -222,7 +237,6 @@ public class DataSourceDictionary implements IDataSourceDictionary
         assert file != null;
 
         boolean found = false;
-        List<String> result = new ArrayList<>();
         Iterator<String> lines = file.iterator(start);
         while (lines.hasNext())
         {

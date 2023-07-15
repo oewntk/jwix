@@ -19,7 +19,7 @@ import edu.mit.jwi.morph.IStemmer;
 
 import java.nio.charset.Charset;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Objects that implement this interface are intended as the main entry point to
@@ -240,12 +240,12 @@ public interface IDictionary extends IHasVersion, IHasLifecycle, IHasCharset
      *
      * @param start start of lemmas searched for; may not be
      *              <code>null</code>
-     * @param pos   the part of speech over which to iterate; may not be
-     *              <code>null</code>
-     * @return a list of lemmas
+     * @param pos   the part of speech over which to iterate; may be
+     *              <code>null</code>, in which case it ignores pos
+     * @return a set of lemmas in dictionary that have given start
      * @throws NullPointerException if the argument is <code>null</code>
      * @since JWIX 2.4.0.4
      */
     @NonNull
-    List<String> getWords(@NonNull String start, @NonNull POS pos);
+    Set<String> getWords(@NonNull String start, @Nullable POS pos);
 }

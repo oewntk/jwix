@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -880,8 +880,13 @@ public class CachingDictionary implements ICachingDictionary
         }
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getWords(java.lang.String, edu.edu.mit.jwi.item.POS)
+     */
     @NonNull
-    public List<String> getWords(@NonNull String start, @NonNull POS pos)
+    public Set<String> getWords(@NonNull String start, @Nullable POS pos)
     {
         checkOpen();
         assert backing != null;

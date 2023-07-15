@@ -1871,9 +1871,15 @@ public class RAMDictionary implements IRAMDictionary
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see edu.mit.jwi.IDictionary#getWords(java.lang.String, edu.edu.mit.jwi.item.POS)
+     */
     @NonNull
-    public List<String> getWords(@NonNull String start, @NonNull POS pos)
+    public Set<String> getWords(@NonNull String start, @Nullable POS pos)
     {
+        // delegate to backing
         assert backing != null;
         return backing.getWords(start, pos);
     }
