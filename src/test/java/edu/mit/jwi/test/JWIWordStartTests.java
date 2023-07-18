@@ -44,12 +44,18 @@ public class JWIWordStartTests
         }
     }
 
-    // enum
-
     @Test
     public void searchStart()
     {
-        Set<String> result = jwi.getDict().getWords(start, pos);
+        Set<String> result = jwi.getDict().getWords(start, pos, 0);
+        PS.println(start);
+        PS.println(result);
+    }
+
+    @Test
+    public void searchStartLimited()
+    {
+        Set<String> result = jwi.getDict().getWords(start, pos, 3);
         PS.println(start);
         PS.println(result);
     }

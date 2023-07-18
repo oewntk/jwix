@@ -205,26 +205,26 @@ public class DataSourceDictionary implements IDataSourceDictionary
     }
 
     @NonNull
-    public Set<String> getWords(@NonNull String start, @Nullable POS pos)
+    public Set<String> getWords(@NonNull String start, @Nullable POS pos, int limit)
     {
         checkOpen();
         Set<String> result = new TreeSet<>();
         if (pos != null)
         {
-            getWords(start, pos, result);
+            getWords(start, pos, limit, result);
         }
         else
         {
             for (POS pos2 : POS.values())
             {
-                getWords(start, pos2, result);
+                getWords(start, pos2, limit,result);
             }
         }
         return result;
     }
 
     @NonNull
-    protected Collection<String> getWords(@NonNull String start, @NonNull POS pos, @NonNull Set<String> result)
+    protected Collection<String> getWords(@NonNull String start, @NonNull POS pos, int limit, @NonNull Set<String> result)
     {
         checkOpen();
         IContentType<IIndexWord> content = provider.resolveContentType(DataType.WORD, pos);
@@ -252,6 +252,10 @@ public class DataSourceDictionary implements IDataSourceDictionary
                     found = true;
                 }
                 else if (found)
+                {
+                    break;
+                }
+                if (limit > 0 && result.size() >= limit)
                 {
                     break;
                 }

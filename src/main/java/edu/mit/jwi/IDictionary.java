@@ -242,10 +242,11 @@ public interface IDictionary extends IHasVersion, IHasLifecycle, IHasCharset
      *              <code>null</code>
      * @param pos   the part of speech over which to iterate; may be
      *              <code>null</code>, in which case it ignores pos
+     * @param limit maximum number of results, 0 for no limit
      * @return a set of lemmas in dictionary that have given start
      * @throws NullPointerException if the argument is <code>null</code>
      * @since JWIX 2.4.0.4
      */
     @NonNull
-    Set<String> getWords(@NonNull String start, @Nullable POS pos);
+    Set<String> getWords(@NonNull String start, @Nullable POS pos, int limit);
 }

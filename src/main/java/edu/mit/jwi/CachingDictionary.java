@@ -883,13 +883,13 @@ public class CachingDictionary implements ICachingDictionary
     /*
      * (non-Javadoc)
      *
-     * @see edu.mit.jwi.IDictionary#getWords(java.lang.String, edu.edu.mit.jwi.item.POS)
+     * @see edu.mit.jwi.IDictionary#getWords(java.lang.String, edu.edu.mit.jwi.item.POS, int)
      */
     @NonNull
-    public Set<String> getWords(@NonNull String start, @Nullable POS pos)
+    public Set<String> getWords(@NonNull String start, @Nullable POS pos, int limit)
     {
         checkOpen();
         assert backing != null;
-        return backing.getWords(start, pos);
+        return backing.getWords(start, pos, limit);
     }
 }
