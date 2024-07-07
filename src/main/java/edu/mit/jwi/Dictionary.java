@@ -16,6 +16,7 @@ import edu.mit.jwi.item.Word;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Basic {@code IDictionary} implementation that mounts files on disk and has
@@ -88,7 +89,11 @@ public class Dictionary extends CachingDictionary
 
     private void configure(@Nullable Config config)
     {
-        if (config == null)
+		// default
+		setCharset(Charset.defaultCharset());
+
+		// enforce config
+		if (config == null)
         {
             return;
         }
