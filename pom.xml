@@ -5,7 +5,7 @@
   <groupId>io.github.x-englishwordnet</groupId>
   <artifactId>jwix</artifactId>
   <packaging>jar</packaging>
-  <version>2.4.0.7</version>
+  <version>2.4.1.1</version>
 
   <name>Java WordNet Extended Interface</name>
   <description>Java library for interfacing with WordNet and English WordNet</description>
@@ -138,7 +138,7 @@
         <version>1.6.7</version>
         <extensions>true</extensions>
         <configuration>
-          <serverId>ossrh</serverId>
+          <serverId>ossrh_jwi</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
@@ -310,12 +310,12 @@
 
   <distributionManagement>
     <repository>
-      <id>ossrh</id>
+      <id>ossrh_jwi</id>
       <name>Maven Central Staging Repository</name>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
     </repository>
     <snapshotRepository>
-      <id>ossrh</id>
+      <id>ossrh_jwi</id>
       <name>Maven Central Snapshot Repository</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
