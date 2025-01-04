@@ -70,6 +70,7 @@ public class Pointer implements IPointer
     public static final Pointer VERB_GROUP = new Pointer("$", "Verb Group");
     public static final Pointer IS_CAUSED = new Pointer(">^", "Is caused by");
     public static final Pointer IS_ENTAILED = new Pointer("*^", "Is entailed by");
+	public static final Pointer COLLOCATION = new Pointer("`", "Collocation");
 
     // final instance fields
     @NonNull
